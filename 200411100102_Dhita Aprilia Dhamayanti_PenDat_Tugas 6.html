@@ -381,7 +381,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-48589664-b216-4265-ab46-520de9230e1c">
+  <div id="df-507907c8-9932-41ab-af6a-7b246805c15e">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -458,7 +458,7 @@ title="Print to PDF"
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-48589664-b216-4265-ab46-520de9230e1c')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-507907c8-9932-41ab-af6a-7b246805c15e')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -509,12 +509,12 @@ title="Print to PDF"
 
       <script>
         const buttonEl =
-          document.querySelector('#df-48589664-b216-4265-ab46-520de9230e1c button.colab-df-convert');
+          document.querySelector('#df-507907c8-9932-41ab-af6a-7b246805c15e button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-48589664-b216-4265-ab46-520de9230e1c');
+          const element = document.querySelector('#df-507907c8-9932-41ab-af6a-7b246805c15e');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -553,43 +553,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">IndexError</span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="n">cb397d0d557e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">dataset1_url</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">class_names</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">dataset1_url</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span> <span class="p">,</span><span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="nn">/usr/local/lib/python3.7/dist-packages/sklearn/tree/_export.py</span> in <span class="ni">plot_tree</span><span class="nt">(decision_tree, max_depth, feature_names, class_names, label, filled, impurity, node_ids, proportion, rounded, precision, ax, fontsize)</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>         <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">195</span>     <span class="k">return</span> <span class="n">exporter</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">decision_tree</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span> 
-<span class="g g-Whitespace">    </span><span class="mi">197</span> 
-
-<span class="nn">/usr/local/lib/python3.7/dist-packages/sklearn/tree/_export.py</span> in <span class="ni">export</span><span class="nt">(self, decision_tree, ax)</span>
-<span class="g g-Whitespace">    </span><span class="mi">654</span>         <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span>         <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">656</span>         <span class="n">my_tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_tree</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">decision_tree</span><span class="o">.</span><span class="n">tree_</span><span class="p">,</span> <span class="n">decision_tree</span><span class="o">.</span><span class="n">criterion</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>         <span class="n">draw_tree</span> <span class="o">=</span> <span class="n">buchheim</span><span class="p">(</span><span class="n">my_tree</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">658</span> 
-
-<span class="nn">/usr/local/lib/python3.7/dist-packages/sklearn/tree/_export.py</span> in <span class="ni">_make_tree</span><span class="nt">(self, node_id, et, criterion, depth)</span>
-<span class="g g-Whitespace">    </span><span class="mi">630</span>         <span class="c1"># traverses _tree.Tree recursively, builds intermediate</span>
-<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="c1"># &quot;_reingold_tilford.Tree&quot; object</span>
-<span class="ne">--&gt; </span><span class="mi">632</span>         <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_to_str</span><span class="p">(</span><span class="n">et</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">633</span>         <span class="k">if</span> <span class="n">et</span><span class="o">.</span><span class="n">children_left</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">!=</span> <span class="n">_tree</span><span class="o">.</span><span class="n">TREE_LEAF</span> <span class="ow">and</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">634</span>             <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">depth</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span>
-
-<span class="nn">/usr/local/lib/python3.7/dist-packages/sklearn/tree/_export.py</span> in <span class="ni">node_to_str</span><span class="nt">(self, tree, node_id, criterion)</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>             <span class="c1"># Always write node decision criteria, except for leaves</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>                 <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">tree</span><span class="o">.</span><span class="n">feature</span><span class="p">[</span><span class="n">node_id</span><span class="p">]]</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>             <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>                 <span class="n">feature</span> <span class="o">=</span> <span class="s2">&quot;X</span><span class="si">%s%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
-
-<span class="ne">IndexError</span>: list index out of range
-</pre></div>
-</div>
-<img alt="_images/200411100102_Dhita Aprilia Dhamayanti_PenDat_Tugas 6_4_1.png" src="_images/200411100102_Dhita Aprilia Dhamayanti_PenDat_Tugas 6_4_1.png" />
+<img alt="_images/200411100102_Dhita Aprilia Dhamayanti_PenDat_Tugas 6_4_0.png" src="_images/200411100102_Dhita Aprilia Dhamayanti_PenDat_Tugas 6_4_0.png" />
 </div>
 </div>
 </section>
