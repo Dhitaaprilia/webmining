@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Data Mining</title>
+    <title>Page Rank &#8212; Data Mining</title>
   
   
   
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PageRank';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Import Modul" href="200411100102_Ringkasan.html" />
+    <link rel="prev" title="Preprocessing Berita, Summarization &amp; Modeling With Graph Cosine Similirity and Closeness Centrality" href="200411100102_Ringkasan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,25 +167,15 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%201%20Crawling.html">Tugas 1 Crawling PTA</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%20LDA.html">LDA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Clustering%20K-Means.html">K-Means</a></li>
 <li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%20Crawling%20Data%20Berita.html">Tugas 4 Crawling Data Berita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="200411100102_Crawling.html"><strong>Crawling Data Berita Detik</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="200411100102_Ringkasan.html">Import Modul</a></li>
-
-
-
-
-
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="200411100102_Ringkasan.html">Preprocessing Berita, Summarization &amp; Modeling With Graph Cosine Similirity and Closeness Centrality</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Page Rank</a></li>
 </ul>
 
     </div>
@@ -389,9 +379,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -402,19 +390,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Page Rank</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -424,7 +404,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="page-rank">
+<h1>Page Rank<a class="headerlink" href="#page-rank" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -471,7 +453,7 @@ dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-90f67561-fb07-4e3e-856e-1ac45b2506af" class="colab-df-container">
+  <div id="df-bd338ddc-d40a-4dca-bb1c-95682cca89f7" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -581,7 +563,7 @@ dtype: int64
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-90f67561-fb07-4e3e-856e-1ac45b2506af')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bd338ddc-d40a-4dca-bb1c-95682cca89f7')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -633,12 +615,12 @@ dtype: int64
 
     <script>
       const buttonEl =
-        document.querySelector('#df-90f67561-fb07-4e3e-856e-1ac45b2506af button.colab-df-convert');
+        document.querySelector('#df-bd338ddc-d40a-4dca-bb1c-95682cca89f7 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-90f67561-fb07-4e3e-856e-1ac45b2506af');
+        const element = document.querySelector('#df-bd338ddc-d40a-4dca-bb1c-95682cca89f7');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -718,76 +700,57 @@ dtype: int64
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading collection &#39;popular&#39;
 [nltk_data]    | 
 [nltk_data]    | Downloading package cmudict to /root/nltk_data...
-[nltk_data]    |   Unzipping corpora/cmudict.zip.
+[nltk_data]    |   Package cmudict is already up-to-date!
 [nltk_data]    | Downloading package gazetteers to /root/nltk_data...
-[nltk_data]    |   Unzipping corpora/gazetteers.zip.
+[nltk_data]    |   Package gazetteers is already up-to-date!
 [nltk_data]    | Downloading package genesis to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/genesis.zip.
+[nltk_data]    |   Package genesis is already up-to-date!
 [nltk_data]    | Downloading package gutenberg to /root/nltk_data...
-[nltk_data]    |   Unzipping corpora/gutenberg.zip.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package inaugural to /root/nltk_data...
-[nltk_data]    |   Unzipping corpora/inaugural.zip.
+[nltk_data]    |   Package gutenberg is already up-to-date!
+[nltk_data]    | Downloading package inaugural to /root/nltk_data...
+[nltk_data]    |   Package inaugural is already up-to-date!
 [nltk_data]    | Downloading package movie_reviews to
 [nltk_data]    |     /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/movie_reviews.zip.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package names to /root/nltk_data...
-[nltk_data]    |   Unzipping corpora/names.zip.
+[nltk_data]    |   Package movie_reviews is already up-to-date!
+[nltk_data]    | Downloading package names to /root/nltk_data...
+[nltk_data]    |   Package names is already up-to-date!
 [nltk_data]    | Downloading package shakespeare to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/shakespeare.zip.
+[nltk_data]    |   Package shakespeare is already up-to-date!
 [nltk_data]    | Downloading package stopwords to /root/nltk_data...
 [nltk_data]    |   Package stopwords is already up-to-date!
 [nltk_data]    | Downloading package treebank to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/treebank.zip.
+[nltk_data]    |   Package treebank is already up-to-date!
 [nltk_data]    | Downloading package twitter_samples to
 [nltk_data]    |     /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/twitter_samples.zip.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package omw to /root/nltk_data...
+[nltk_data]    |   Package twitter_samples is already up-to-date!
+[nltk_data]    | Downloading package omw to /root/nltk_data...
+[nltk_data]    |   Package omw is already up-to-date!
 [nltk_data]    | Downloading package omw-1.4 to /root/nltk_data...
+[nltk_data]    |   Package omw-1.4 is already up-to-date!
+[nltk_data]    | Downloading package wordnet to /root/nltk_data...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package wordnet to /root/nltk_data...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Package wordnet is already up-to-date!
 [nltk_data]    | Downloading package wordnet2021 to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package wordnet31 to /root/nltk_data...
+[nltk_data]    |   Package wordnet2021 is already up-to-date!
+[nltk_data]    | Downloading package wordnet31 to /root/nltk_data...
+[nltk_data]    |   Package wordnet31 is already up-to-date!
 [nltk_data]    | Downloading package wordnet_ic to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/wordnet_ic.zip.
+[nltk_data]    |   Package wordnet_ic is already up-to-date!
 [nltk_data]    | Downloading package words to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping corpora/words.zip.
+[nltk_data]    |   Package words is already up-to-date!
 [nltk_data]    | Downloading package maxent_ne_chunker to
 [nltk_data]    |     /root/nltk_data...
-[nltk_data]    |   Unzipping chunkers/maxent_ne_chunker.zip.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    | Downloading package punkt to /root/nltk_data...
+[nltk_data]    |   Package maxent_ne_chunker is already up-to-date!
+[nltk_data]    | Downloading package punkt to /root/nltk_data...
 [nltk_data]    |   Package punkt is already up-to-date!
 [nltk_data]    | Downloading package snowball_data to
 [nltk_data]    |     /root/nltk_data...
+[nltk_data]    |   Package snowball_data is already up-to-date!
 [nltk_data]    | Downloading package averaged_perceptron_tagger to
 [nltk_data]    |     /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]    |   Unzipping taggers/averaged_perceptron_tagger.zip.
+[nltk_data]    |   Package averaged_perceptron_tagger is already up-
+[nltk_data]    |       to-date!
 [nltk_data]    | 
 [nltk_data]  Done downloading collection popular
 </pre></div>
@@ -806,7 +769,7 @@ dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-e6f5f32a-e635-4f9d-a9c4-e29c4e99c5d4" class="colab-df-container">
+  <div id="df-c1bfc4df-313a-4bee-ad5c-189bdd93a871" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -861,7 +824,7 @@ dtype: int64
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-e6f5f32a-e635-4f9d-a9c4-e29c4e99c5d4')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c1bfc4df-313a-4bee-ad5c-189bdd93a871')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -913,12 +876,12 @@ dtype: int64
 
     <script>
       const buttonEl =
-        document.querySelector('#df-e6f5f32a-e635-4f9d-a9c4-e29c4e99c5d4 button.colab-df-convert');
+        document.querySelector('#df-c1bfc4df-313a-4bee-ad5c-189bdd93a871 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-e6f5f32a-e635-4f9d-a9c4-e29c4e99c5d4');
+        const element = document.querySelector('#df-c1bfc4df-313a-4bee-ad5c-189bdd93a871');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -983,7 +946,7 @@ dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-c2d0c1b3-e5e5-46d8-8b2e-d6070caef9b2" class="colab-df-container">
+  <div id="df-a8d44db8-5eac-490d-87d8-da7114f73ef6" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1056,7 +1019,7 @@ dtype: int64
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-c2d0c1b3-e5e5-46d8-8b2e-d6070caef9b2')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a8d44db8-5eac-490d-87d8-da7114f73ef6')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -1108,12 +1071,12 @@ dtype: int64
 
     <script>
       const buttonEl =
-        document.querySelector('#df-c2d0c1b3-e5e5-46d8-8b2e-d6070caef9b2 button.colab-df-convert');
+        document.querySelector('#df-a8d44db8-5eac-490d-87d8-da7114f73ef6 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-c2d0c1b3-e5e5-46d8-8b2e-d6070caef9b2');
+        const element = document.querySelector('#df-a8d44db8-5eac-490d-87d8-da7114f73ef6');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1168,7 +1131,7 @@ dtype: int64
 </pre></div>
 </div>
 <div class="output text_html">
-  <div id="df-cfd8e208-69de-4119-b568-4a8c2ade3874" class="colab-df-container">
+  <div id="df-3a40f20e-c763-4aef-a354-430b55a9f82d" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1482,7 +1445,7 @@ dtype: int64
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-cfd8e208-69de-4119-b568-4a8c2ade3874')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-3a40f20e-c763-4aef-a354-430b55a9f82d')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -1534,12 +1497,12 @@ dtype: int64
 
     <script>
       const buttonEl =
-        document.querySelector('#df-cfd8e208-69de-4119-b568-4a8c2ade3874 button.colab-df-convert');
+        document.querySelector('#df-3a40f20e-c763-4aef-a354-430b55a9f82d button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-cfd8e208-69de-4119-b568-4a8c2ade3874');
+        const element = document.querySelector('#df-3a40f20e-c763-4aef-a354-430b55a9f82d');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1590,7 +1553,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2b7d592af32d237f0da3d5354be9438671352d7ac59eacbb1d6db3e1db704386.png" src="_images/2b7d592af32d237f0da3d5354be9438671352d7ac59eacbb1d6db3e1db704386.png" />
+<img alt="_images/fe035de4c4368a2f9fd8bd389e57af45e047e3f1854aab2bfd38a5b25cc8436c.png" src="_images/fe035de4c4368a2f9fd8bd389e57af45e047e3f1854aab2bfd38a5b25cc8436c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1707,6 +1670,7 @@ Rank 10: dataran nilai Pagerank 0.02455889764617175
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1744,7 +1708,7 @@ Rank 10: dataran nilai Pagerank 0.02455889764617175
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Import Modul</p>
+        <p class="prev-next-title">Preprocessing Berita, Summarization &amp; Modeling With Graph Cosine Similirity and Closeness Centrality</p>
       </div>
     </a>
 </div>
@@ -1753,20 +1717,6 @@ Rank 10: dataran nilai Pagerank 0.02455889764617175
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
