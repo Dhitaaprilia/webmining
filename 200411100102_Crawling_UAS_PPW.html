@@ -1,0 +1,2077 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Crawling UAS &#8212; Data Mining</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '200411100102_Crawling_UAS_PPW';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UAS" href="200411100102_UAS_PPW.html" />
+    <link rel="prev" title="Page Rank" href="200411100102_Ekstraksi%20Fitur%20Page%20Rank.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Foto.jpg" class="logo__image only-light" alt="Data Mining - Home"/>
+    <script>document.write(`<img src="_static/Foto.jpg" class="logo__image only-dark" alt="Data Mining - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%201%20Crawling.html">Tugas 1 Crawling PTA</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%20LDA.html">LDA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Clustering%20K-Means.html">K-Means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_PPW%20A_Tugas%20Crawling%20Data%20Berita.html">Tugas 4 Crawling Data Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_Crawling.html"><strong>Crawling Data Berita Detik</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_Ringkasan.html">Preprocessing Berita, Summarization &amp; Modeling With Graph Cosine Similirity and Closeness Centrality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_Ekstraksi%20Fitur%20Page%20Rank.html">Page Rank</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling UAS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="200411100102_UAS_PPW.html">UAS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/Dhitaaprilia/datamining.git/blob/gh-pages/_sources/200411100102_Crawling_UAS_PPW.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Dhitaaprilia/datamining.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Dhitaaprilia/datamining.git/issues/new?title=Issue%20on%20page%20%2F200411100102_Crawling_UAS_PPW.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/200411100102_Crawling_UAS_PPW.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Crawling UAS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="crawling-uas">
+<h1>Crawling UAS<a class="headerlink" href="#crawling-uas" title="Permalink to this heading">#</a></h1>
+<section id="import-library">
+<h2>Import Library<a class="headerlink" href="#import-library" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>requests</strong> : Ini adalah sebuah modul dalam Python yang digunakan untuk membuat permintaan HTTP, seperti mengambil konten dari URL atau berkomunikasi dengan API.</p></li>
+<li><p><strong>BeautifulSoup</strong> : Pustaka ini digunakan untuk melakukan web scraping atau ekstraksi data dari dokumen HTML. Ini membantu dalam mengekstrak informasi dari halaman web dengan lebih mudah, memanfaatkan struktur HTML.</p></li>
+<li><p><strong>pandas</strong> : Pustaka ini sangat berguna dalam analisis data. Ini menyediakan struktur data yang mudah digunakan dan banyak alat untuk membersihkan, mengubah, dan menganalisis data, terutama dalam bentuk tabel dan dataframe.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+  <span class="n">data_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">data_page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">data_berita</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">container</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">data_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">container_page</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;detail__body-text itp_bodycontent&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">container_page</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+    <span class="n">judul_berita</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;detail__title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">tanggal_berita</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;detail__date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="n">data_content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+      <span class="k">if</span>  <span class="s1">&#39;ADVERTISEMENT&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">and</span>  <span class="s1">&#39;SCROLL TO RESUME CONTENT&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;detail__multiple&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data_content</span> <span class="o">+=</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+
+    <span class="n">data_berita</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">judul_berita</span><span class="p">)</span>
+    <span class="n">data_berita</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tanggal_berita</span><span class="p">)</span>
+    <span class="n">data_berita</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_content</span><span class="p">)</span>
+    <span class="n">data_berita</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_berita</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">get_data</span></code> untuk mengambil data dari sebuah URL yang diberikan dan mengekstrak informasi tertentu dari halaman web tersebut.</p>
+<ol class="arabic simple">
+<li><p><strong>Import Libraries</strong>: <code class="docutils literal notranslate"><span class="pre">requests</span></code> dan <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> untuk melakukan permintaan HTTP dan untuk melakukan <em>web scraping</em> (mengekstrak data dari halaman web), secara berurutan.</p></li>
+<li><p><strong>HTTP Request</strong>: Fungsi dimulai dengan mengirimkan permintaan HTTP ke URL yang diberikan dengan menggunakan <code class="docutils literal notranslate"><span class="pre">requests.get(url)</span></code>. Respons dari permintaan ini diambil untuk dianalisis.</p></li>
+<li><p><strong>Pemeriksaan Kode Status</strong>: Kode status dari permintaan HTTP diperiksa dengan <code class="docutils literal notranslate"><span class="pre">data_page.status_code</span></code>. Jika status kode adalah 200 (yang berarti permintaan berhasil), maka proses ekstraksi data dilanjutkan. Kode status 200 menandakan bahwa halaman web telah berhasil dimuat.</p></li>
+<li><p><strong>Ekstraksi Data</strong>: Menggunakan <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code>, konten dari halaman web diuraikan untuk menemukan elemen tertentu:</p>
+<ul class="simple">
+<li><p><strong>Judul Berita</strong>: Diambil dari elemen dengan kelas CSS <code class="docutils literal notranslate"><span class="pre">detail__title</span></code>.</p></li>
+<li><p><strong>Tanggal Berita</strong>: Diambil dari elemen dengan kelas CSS <code class="docutils literal notranslate"><span class="pre">detail__date</span></code>.</p></li>
+<li><p><strong>Konten Berita</strong>: Dalam loop <code class="docutils literal notranslate"><span class="pre">for</span></code> yang mengiterasi melalui elemen-elemen <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code>, konten berita diambil. Namun, beberapa kondisi diperiksa, seperti memastikan teks tidak mengandung kata ‘ADVERTISEMENT’ atau ‘SCROLL TO RESUME CONTENT’, dan mengecualikan elemen dengan kelas <code class="docutils literal notranslate"><span class="pre">detail__multiple</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Penyimpanan Data</strong>: Semua informasi yang telah diekstrak (judul, tanggal, konten, dan kategori) disimpan dalam list <code class="docutils literal notranslate"><span class="pre">data_berita</span></code>.</p></li>
+<li><p><strong>Pengembalian Data</strong>: Setelah informasi dikumpulkan dalam list <code class="docutils literal notranslate"><span class="pre">data_berita</span></code>, data tersebut dikembalikan menggunakan pernyataan <code class="docutils literal notranslate"><span class="pre">return</span></code>.</p></li>
+</ol>
+<p>Fungsi ini dirancang untuk mengambil berita dari suatu URL, membersihkan teks dari konten yang tidak diinginkan atau iklan, dan mengembalikan informasi berita beserta kategorinya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_content</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+  <span class="n">menu_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">menu_page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">menu_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">content_page</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;grid-row list-content&#39;</span><span class="p">)</span>
+    <span class="n">container_content</span> <span class="o">=</span> <span class="n">content_page</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;media media--left media--image-radius block-link&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Untuk menyimpan url content</span>
+    <span class="n">data_content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">container_content</span><span class="p">:</span>
+      <span class="n">link_content</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;media__link&#39;</span><span class="p">)</span>
+      <span class="n">subtitle</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;media__subtitle&#39;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">subtitle</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;20.detik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">link_content</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;intermeso&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">link_content</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;foto&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">link_content</span><span class="p">):</span>
+        <span class="n">data_berita</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">link_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">),</span> <span class="n">category</span><span class="p">)</span>
+        <span class="n">data_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_berita</span><span class="p">)</span>
+
+    <span class="n">next_page</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;pagination__item&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">next_page</span><span class="p">:</span>
+      <span class="k">if</span> <span class="s1">&#39;Next&#39;</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">data_content</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">get_content</span></code> untuk mengambil konten dari halaman web yang berisi daftar konten dengan kategori tertentu, dan kemudian mengekstrak konten berita dari setiap link yang valid.</p>
+<ol class="arabic simple">
+<li><p><strong>HTTP Request</strong>: kode melakukan permintaan HTTP ke URL yang diberikan menggunakan <code class="docutils literal notranslate"><span class="pre">requests.get(url)</span></code> untuk mengunduh halaman web.</p></li>
+<li><p><strong>Pemeriksaan Kode Status</strong>: Kode status halaman web diperiksa menggunakan <code class="docutils literal notranslate"><span class="pre">menu_page.status_code</span></code>. Jika status kode adalah 200 (berarti permintaan berhasil), proses ekstraksi konten dilanjutkan.</p></li>
+<li><p><strong>Ekstraksi Konten</strong>: Menggunakan <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code>, konten dari halaman web diuraikan untuk menemukan elemen tertentu:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">content_page</span></code>: Ini adalah bagian dari halaman yang berisi daftar konten.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">container_content</span></code>: Di sini, semua konten yang relevan disimpan dalam <code class="docutils literal notranslate"><span class="pre">container_content</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Loop untuk Konten</strong>: dilakukan loop pada <code class="docutils literal notranslate"><span class="pre">container_content</span></code> untuk setiap elemen yang ditemukan di dalamnya. Setiap elemen tersebut diuji untuk memastikan bahwa linknya valid dan bukan merupakan jenis konten tertentu (seperti ‘foto’ atau halaman ‘20.detik’) yang tidak diinginkan.</p></li>
+<li><p><strong>Ekstraksi Data Berita</strong>: Jika link terbukti valid, fungsi <code class="docutils literal notranslate"><span class="pre">get_data</span></code> dipanggil untuk mengambil informasi terkait berita dari link tersebut menggunakan fungsi yang telah kita bahas sebelumnya (<code class="docutils literal notranslate"><span class="pre">get_data(link_content.get('href'),</span> <span class="pre">category)</span></code>). Informasi ini ditambahkan ke dalam list <code class="docutils literal notranslate"><span class="pre">data_content</span></code>.</p></li>
+<li><p><strong>Mencari Halaman Berikutnya</strong>: Setelah semua konten dari halaman ini diolah, kode mencari tautan untuk halaman berikutnya jika ada. Jika ditemukan tautan ‘Next’, maka fungsi mengembalikan tuple yang berisi list <code class="docutils literal notranslate"><span class="pre">data_content</span></code> yang berisi konten yang sudah diambil, serta URL dari halaman berikutnya.</p></li>
+</ol>
+<p>Fungsi ini mengambil konten dari halaman web yang berisi daftar konten, mengekstrak berita dari setiap link yang valid, dan mengembalikan data berita beserta URL halaman berikutnya untuk dilanjutkan ke proses ekstraksi data berikutnya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Edu&#39;</span><span class="p">]):</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+  <span class="c1"># Untuk mengecek respon url dan mencari menu sidebar</span>
+  <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;nav&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;static-nav&#39;</span><span class="p">)</span>
+    <span class="n">link_menu</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="c1"># Untuk menyimpan url navbar</span>
+    <span class="n">save_link_navbar</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">link_menu</span><span class="p">:</span>
+      <span class="k">if</span> <span class="s1">&#39;travel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;wolipop&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">):</span>
+        <span class="n">save_link_navbar</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)])</span>
+
+    <span class="c1"># Untuk mengecek respon url dan mencari link content</span>
+    <span class="n">data_semua_berita</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">nav</span> <span class="ow">in</span> <span class="n">save_link_navbar</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">category</span><span class="p">:</span>
+        <span class="n">data_berita</span><span class="p">,</span> <span class="n">next_page</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">nav</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">data_berita</span>
+
+
+        <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">next_page</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_content</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+          <span class="n">more_content</span><span class="p">,</span> <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">next_page_more</span><span class="p">,</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+          <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">more_content</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Judul&#39;</span><span class="p">,</span> <span class="s1">&#39;Tanggal&#39;</span><span class="p">,</span> <span class="s1">&#39;Artikel&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Data Berita Detik EDU.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Berhasil Di Simpan dengan Jumlah </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sport&#39;</span><span class="p">]):</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+  <span class="c1"># Untuk mengecek respon url dan mencari menu sidebar</span>
+  <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;nav&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;static-nav&#39;</span><span class="p">)</span>
+    <span class="n">link_menu</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="c1"># Untuk menyimpan url navbar</span>
+    <span class="n">save_link_navbar</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">link_menu</span><span class="p">:</span>
+      <span class="k">if</span> <span class="s1">&#39;travel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;wolipop&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">):</span>
+        <span class="n">save_link_navbar</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)])</span>
+
+    <span class="c1"># Untuk mengecek respon url dan mencari link content</span>
+    <span class="n">data_semua_berita</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">nav</span> <span class="ow">in</span> <span class="n">save_link_navbar</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">category</span><span class="p">:</span>
+        <span class="n">data_berita</span><span class="p">,</span> <span class="n">next_page</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">nav</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">data_berita</span>
+
+
+        <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">next_page</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_content</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+          <span class="n">more_content</span><span class="p">,</span> <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">next_page_more</span><span class="p">,</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+          <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">more_content</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Judul&#39;</span><span class="p">,</span> <span class="s1">&#39;Tanggal&#39;</span><span class="p">,</span> <span class="s1">&#39;Artikel&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Data Berita Detik SPORT.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Berhasil Di Simpan dengan Jumlah </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Food&#39;</span><span class="p">]):</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+  <span class="c1"># Untuk mengecek respon url dan mencari menu sidebar</span>
+  <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;nav&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;static-nav&#39;</span><span class="p">)</span>
+    <span class="n">link_menu</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="c1"># Untuk menyimpan url navbar</span>
+    <span class="n">save_link_navbar</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">link_menu</span><span class="p">:</span>
+      <span class="k">if</span> <span class="s1">&#39;travel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;wolipop&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">):</span>
+        <span class="n">save_link_navbar</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)])</span>
+
+    <span class="c1"># Untuk mengecek respon url dan mencari link content</span>
+    <span class="n">data_semua_berita</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">nav</span> <span class="ow">in</span> <span class="n">save_link_navbar</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">category</span><span class="p">:</span>
+        <span class="n">data_berita</span><span class="p">,</span> <span class="n">next_page</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">nav</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">data_berita</span>
+
+
+        <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">next_page</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_content</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+          <span class="n">more_content</span><span class="p">,</span> <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">next_page_more</span><span class="p">,</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+          <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">more_content</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Judul&#39;</span><span class="p">,</span> <span class="s1">&#39;Tanggal&#39;</span><span class="p">,</span> <span class="s1">&#39;Artikel&#39;</span><span class="p">,</span> <span class="s1">&#39;Category&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Data Berita Detik FOOD.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Berhasil Di Simpan dengan Jumlah </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_semua_berita</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">scraping_detik_news</span></code> untuk melakukan <em>web scraping</em> pada situs web Detik News, mengambil berita dari berbagai kategori tertentu, kemudian menyimpan informasi tersebut dalam format CSV. Ini dilakukan dalam beberapa langkah :</p>
+<ol class="arabic simple">
+<li><p><strong>Mengambil Menu Sidebar</strong>: Pertama, kode mengambil menu sidebar dari halaman utama menggunakan BeautifulSoup. Ini memungkinkan untuk mengekstrak daftar kategori dan tautan menu yang terkait.</p></li>
+<li><p><strong>Mengecek Kategori</strong>: Setelah tautan-tautan menu ditemukan, kode memeriksa setiap tautan dan memeriksa apakah kategori berita pada tautan tersebut sesuai dengan kategori yang diberikan pada parameter fungsi.</p></li>
+<li><p><strong>Ekstraksi Konten Berita</strong>: Jika kategori berita sesuai dengan yang diminta, fungsi <code class="docutils literal notranslate"><span class="pre">get_content</span></code> dipanggil untuk mengekstrak konten berita dari setiap tautan tersebut. Konten yang diambil akan ditambahkan ke dalam list <code class="docutils literal notranslate"><span class="pre">data_semua_berita</span></code>.</p></li>
+<li><p><strong>Iterasi untuk Lebih Banyak Konten</strong>: Kemudian, kode mengambil lebih banyak konten berita dari halaman berikutnya (jika ada) menggunakan fungsi <code class="docutils literal notranslate"><span class="pre">get_content</span></code>, dengan memanfaatkan tautan “Next” dari halaman tersebut. Ini dilakukan dalam loop, mengambil konten tambahan sampai jumlah yang diminta (<code class="docutils literal notranslate"><span class="pre">num_content</span></code>) terpenuhi.</p></li>
+<li><p><strong>Pembuatan DataFrame dan Penyimpanan Data</strong>: Setelah semua konten berita dikumpulkan, data diorganisir dalam bentuk <em>dataframe</em> menggunakan <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. Selanjutnya, data ini disimpan dalam format CSV.</p></li>
+<li><p><strong>Pesan Konfirmasi</strong>: Terakhir, fungsi memberikan pesan konfirmasi yang menyatakan bahwa data telah berhasil disimpan bersama dengan jumlah total berita yang terkumpul.</p></li>
+</ol>
+<p>Secara keseluruhan, fungsi ini untuk mengambil berita dari situs Detik News, khususnya dari kategori yang telah ditentukan, kemudian menyimpannya dalam format CSV untuk penggunaan atau analisis lebih lanjut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Edu&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/beasiswa/d-7088239/beasiswa-kuliah-di-singapura-tanpa-toefl-sarjana-bisa-lanjut-s3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7088292/syarat-kpps-pemilu-2024-tugas-honor-cara-daftar-dan-jadwalnya
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7087813/ubah-pltu-dengan-nuklir-itb-gandeng-quantified-carbon
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/perguruan-tinggi/d-7087737/nadiem-makarim-kita-pastikan-beban-administrasi-dosen-berkurang
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/edutainment/d-7087575/mahasiswa-ugm-panen-1-103-medali-sepanjang-2023-paling-banyak-dari-lomba-nasional
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7087158/india-selesaikan-misi-eksplorasi-bulan-modul-chandrayaan-3-kembali-ke-orbit-bumi
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/perguruan-tinggi/d-7087676/nggak-lolos-seleksi-program-kampus-merdeka-pantau-mbkm-mandiri
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/edutainment/d-7087200/dukung-energi-hijau-uns-sulap-hidrogen-jadi-bahan-bakar-mobil
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/sekolah/d-7087485/pendaftaran-sma-taruna-nusantara-2024-syarat-jadwal-dan-biaya-sekolah
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7087890/4-cara-perkenalan-diri-dalam-bahasa-inggris-di-depan-kelas-dan-contohnya
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/edutainment/d-7087456/guru-besar-ub-ai-hanya-sarana-pendukung-bukan-referensi-utama-mahasiswa
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/seleksi-masuk-pt/d-7087628/23-universitas-terbaik-jurusan-kimia-versi-scimago-2023-referensi-snpmb-2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/seleksi-masuk-pt/d-7087601/60-prodi-terketat-di-snbp-dan-snbt-2023-referensi-snpmb-2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7087301/hari-nusantara-13-desember-asal-usul-peringatan-dan-tema-tahun-2023
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/detikpedia/d-7087425/apa-itu-majelis-umum-pbb-ini-sejarah-dan-tugasnya
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://www.detik.com/edu/perguruan-tinggi/d-7087265/25-ptn-terakreditasi-unggul-ban-pt-bisa-jadi-referensi-snpmb-2024
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-12acdb0a1206&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Edu&#39;</span><span class="p">])</span>
+
+<span class="nn">&lt;ipython-input-6-60bde880586d&gt;</span> in <span class="ni">scraping_detik_news</span><span class="nt">(url, num_content, category)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>         <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">next_page</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_content</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>           <span class="n">more_content</span><span class="p">,</span> <span class="n">next_page_more</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">(</span><span class="n">next_page_more</span><span class="p">,</span> <span class="n">nav</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>           <span class="n">data_semua_berita</span> <span class="o">+=</span> <span class="n">more_content</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> 
+
+<span class="nn">&lt;ipython-input-3-6332406b2823&gt;</span> in <span class="ni">get_content</span><span class="nt">(url, category)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">get_content</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>   <span class="n">menu_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>   <span class="k">if</span> <span class="n">menu_page</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">menu_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">content_page</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;grid-row list-content&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd"> </span>
+<span class="ne">---&gt; </span><span class="mi">73</span><span class="sd">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="sd"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="sd">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="sd">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">59</span><span class="sd">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="sd"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="sd">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="sd">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span><span class="sd">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="sd">         return resp</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="sd">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">703</span><span class="sd">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="sd">         # Total elapsed time of the request (approximately)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">484</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span><span class="sd">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">486</span><span class="sd">             resp = conn.urlopen(</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span><span class="sd">                 method=request.method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span><span class="sd">                 url=url,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="sd">             # Make the request on the HTTPConnection object</span>
+<span class="ne">--&gt; </span><span class="mi">791</span><span class="sd">             response = self._make_request(</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span><span class="sd">                 conn,</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span><span class="sd">                 method,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
+<span class="g g-Whitespace">    </span><span class="mi">466</span><span class="sd">             # Trigger any extra validation we need to do.</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="sd">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">468</span><span class="sd">                 self._validate_conn(conn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">469</span><span class="sd">             except (SocketTimeout, BaseSSLError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">470</span><span class="sd">                 self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_validate_conn</span><span class="nt">(self, conn)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span><span class="sd">         # Force connect early to allow us to validate the connection.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span><span class="sd">         if conn.is_closed:</span>
+<span class="ne">-&gt; </span><span class="mi">1097</span><span class="sd">             conn.connect()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span><span class="sd">         if not conn.is_verified:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span><span class="sd">     def connect(self) -&gt; None:</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span><span class="sd">         sock: socket.socket | ssl.SSLSocket</span>
+<span class="ne">--&gt; </span><span class="mi">611</span><span class="sd">         self.sock = sock = self._new_conn()</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span><span class="sd">         server_hostname: str = self.host</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span><span class="sd">         tls_in_tls = False</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">203</span>             <span class="n">sock</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>             <span class="k">if</span> <span class="n">source_address</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>                 <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">73</span>             <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>             <span class="c1"># Break explicitly a reference cycle</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>             <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sport&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://sport.detik.com/raket/d-7087762/fajar-rian-kalahkan-bagas-fikri-kini-alihkan-fokus-ke-partai-kedua
+https://sport.detik.com/raket/d-7087760/bwf-world-tour-finals-turnamen-bulutangkis-dengan-hadiah-terbesar
+https://sport.detik.com/raket/d-7087563/hasil-bwf-world-tour-finals-2023-apri-fadia-petik-kemenangan
+https://sport.detik.com/raket/d-7087335/hasil-bwf-world-tour-finals-fajar-rian-menangi-perang-saudara
+https://sport.detik.com/raket/d-7087203/dikalahkan-tai-tzu-ying-gregoria-kurang-lepas-dan-terlalu-hati-hati
+https://sport.detik.com/raket/d-7087066/hasil-bwf-world-tour-finals-2023-gregoria-ditaklukkan-tai-tzu-ying
+https://sport.detik.com/sport-lain/d-7086619/indonesia-open-aquatic-championship-jadi-ajang-kualifikasi-pon-2024
+https://sport.detik.com/sport-lain/d-7086581/citadel-racing-turun-di-balapan-porsche-ini-hasilnya
+https://sport.detik.com/sport-lain/d-7086331/menpora-lewat-olahraga-anak-muda-bisa-belajar-jadi-pemimpin
+https://sport.detik.com/sport-lain/d-7086642/koi-respons-keinginan-pertacami-jadi-anggota
+https://sport.detik.com/basket/d-7086320/amartha-hangtuah-jakarta-antusias-tatap-ibl-2024
+https://sport.detik.com/raket/d-7085989/gregoria-vs-tai-tzu-ying-jorji-belum-pernah-menang-dalam-8-pertemuan
+https://sport.detik.com/raket/d-7085932/bwf-world-tour-finals-2023-apri-fadia-siap-capek-di-laga-perdana
+https://sport.detik.com/moto-gp/d-7085787/francesco-bagnaia-dapat-sambutan-meriah-di-kandang-juventus
+https://sport.detik.com/raket/d-7085614/grup-dan-jadwal-langkap-bwf-world-tour-finals-2023
+https://sport.detik.com/raket/d-7085418/dimulai-besok-ini-jadwal-bwf-world-tour-finals-2023-hari-pertama
+https://sport.detik.com/moto-gp/d-7085191/alex-rins-sudah-nyaman-dengan-yamaha
+https://sport.detik.com/raket/d-7085126/bwf-world-tour-finals-tekad-fajar-rian-dan-bagas-fikri-lolos-bareng
+https://sport.detik.com/sport-lain/d-7084572/usai-sukses-di-kejuaraan-dunia-pb-pertacami-berharap-jadi-anggota-koi
+https://sport.detik.com/basket/d-7084529/pindah-ke-kota-hujan-rans-simba-bogor-antusias-sambut-ibl-2024
+https://sport.detik.com/moto-gp/d-7084388/pedro-acosta-anak-ajaib-yang-ramaikan-persaingan-motogp-2024
+https://sport.detik.com/moto-gp/d-7083947/marc-marquez-ungkap-alasan-sering-jatuh-dengan-honda
+https://sport.detik.com/basket/d-7084034/dewa-united-banten-pasang-target-juara-ibl-2024
+https://sport.detik.com/moto-gp/d-7083611/marc-marquez-kepergianku-dari-honda-jadi-win-win-situation
+https://sport.detik.com/raket/d-7083542/pelatih-pastikan-ginting-dan-jojo-prima-jelang-bwf-world-tour-finals-2023
+https://sport.detik.com/raket/d-7083368/bwf-world-tour-finals-2023-tim-bulutangkis-indonesia-mulai-berlatih
+https://sport.detik.com/sport-lain/d-7083273/diikuti-5-000-pelari-pln-electric-run-bantu-kurangi-emisi-11-880-kg-co2
+https://sport.detik.com/sport-lain/d-7082531/arfiansyah-jadi-sorotan-di-kejuaraan-atletik-pelajar-jawa-timur
+https://sport.detik.com/sport-lain/d-7082491/jalan-sehat-ini-ajak-anak-muda-menabung-untuk-masa-depan
+https://sport.detik.com/moto-gp/d-7082134/rossi-akan-bantu-marini-semaksimal-mungkin-di-honda
+https://sport.detik.com/moto-gp/d-7082075/bos-ducati-ungkap-perasaan-motornya-diinginkan-marc-marquez
+https://sport.detik.com/raket/d-7082019/kans-gregoria-taklukkan-tai-tzu-ying-dan-an-se-young-di-world-tour-finals
+https://sport.detik.com/sport-lain/d-7082020/buka-turnamen-golf-walkot-cilegon-harap-lahir-banyak-atlet-berbakat
+https://sport.detik.com/sport-lain/d-7081862/rahmat-erwin-boyong-tiga-perak-kualifikasi-olimpiade-di-qatar
+https://sport.detik.com/sport-lain/d-7081808/hasil-one-pride-mma-75-lipin-sitorus-juara-baru-kelas-atom
+https://sport.detik.com/moto-gp/d-7081622/fabio-quartararo-ingin-kembali-ke-papan-atas-bersama-yamaha
+https://sport.detik.com/raket/d-7081531/jadwal-undian-bwf-world-tour-finals-2023
+https://sport.detik.com/raket/d-7081471/bwf-tour-finals-tim-indonesia-yakin-mampu-lolos-grup-dan-tembus-final
+https://sport.detik.com/moto-gp/d-7081294/ducati-buka-peluang-rekrut-marc-marquez-untuk-motogp-2025
+https://sport.detik.com/moto-gp/d-7081244/quartararo-ancam-yamaha-lagi
+https://sport.detik.com/sport-lain/d-7080890/ribuan-orang-ramaikan-jalan-sehat-penuh-warna-di-tangerang
+https://sport.detik.com/moto-gp/d-7080012/duh-gaya-balapan-marc-marquez-dituding-kacau
+https://sport.detik.com/sport-lain/d-7079987/hari-pertama-kejuaraan-atletik-pelajar-di-jawa-timur-tuntas
+https://sport.detik.com/sport-lain/d-7079915/ingin-nonton-one-pride-mma-75-begini-caranya
+https://sport.detik.com/moto-gp/d-7079593/marc-marquez-sadar-bisa-saja-tak-sukses-di-ducati
+https://sport.detik.com/moto-gp/d-7078719/marc-marquez-bukan-rider-favorit-ceo-ducati
+https://sport.detik.com/sport-lain/d-7078253/titel-kejurnas-adventure-off-road-2023-ditentukan-di-sirkuit-janoko
+https://sport.detik.com/raket/d-7077907/harapan-jonatan-pisah-grup-dari-ginting-di-bwf-world-tour-finals-2023
+https://sport.detik.com/sport-lain/d-7078107/perkuat-sport-tourism-di-ntb-menparekraf-dukung-porsche-sprint-challenge
+https://sport.detik.com/sport-lain/d-7078082/one-pride-mma-75-ade-permana-vs-lipin-sitorus-ujian-sang-raja-kelas-atom
+https://sport.detik.com/moto-gp/d-7077803/marc-marquez-akan-tambah-ketegangan-di-ducati
+https://sport.detik.com/sport-lain/d-7078166/golftrovert-jadi-tempat-kumpulnya-pencinta-golf
+https://sport.detik.com/sport-lain/d-7078124/kejurnas-teqball-2023-tuntas
+https://sport.detik.com/moto-gp/d-7077801/jorge-martin-kaget-dengan-respons-marc-marquez-di-motogp-valencia
+https://sport.detik.com/raket/d-7077799/ini-target-jonatan-christie-di-bwf-world-tour-finals-2023
+https://sport.detik.com/raket/d-7077798/pbsi-buka-kans-dejan-glo-dikirim-ke-olimpiade-asalkan
+https://sport.detik.com/moto-gp/d-7077583/motogp-2024-marc-marquez-akan-jadi-duri-untuk-rider-ducati
+https://sport.detik.com/raket/d-7077334/kata-fajar-rian-soal-beban-dan-celotehan-netizen
+https://sport.detik.com/moto-gp/d-7077026/jorge-lorenzo-luca-marini-keliru-pindah-ke-honda
+https://sport.detik.com/raket/d-7077307/gregoria-cs-maksimalkan-waktu-tersisa-dengan-latihan-tambahan
+https://sport.detik.com/raket/d-7077029/bwf-tour-finals-2023-pbsi-tetapkan-target-2-wakil-di-final
+https://sport.detik.com/moto-gp/d-7076880/cerita-alex-marquez-dijegal-yamaha-karena-konflik-rossi-marc-marquez
+https://sport.detik.com/sport-lain/d-7076348/tour-de-siak-2023-selesai-nusantara-pro-cycling-team-juaranya
+https://sport.detik.com/moto-gp/d-7076159/jorge-martin-gagal-juara-motogp-sesalkan-crash-di-mandalika
+https://sport.detik.com/basket/d-7075641/ibl-2024-diikuti-14-tim
+https://sport.detik.com/raket/d-7075575/usai-menikah-jonatan-masih-tinggal-di-asrama-sampai-olimpiade
+https://sport.detik.com/sport-lain/d-7075577/porsche-sprint-challenge-digelar-di-sirkuit-mandalika-ada-tiket-gratis
+https://sport.detik.com/raket/d-7075364/kevin-sanjaya-izin-absen-dari-pelatnas-jaga-istri-jelang-persalinan
+https://sport.detik.com/raket/d-7075291/pramudya-logout-dari-pelatnas-aryono-masih-bagian-dari-pbsi
+https://sport.detik.com/raket/d-7075290/di-tengah-spekulasi-pramudya-keluar-pelatnas-ini-harapan-yeremia
+https://sport.detik.com/moto-gp/d-7074401/trackhouse-racing-resmi-gantikan-rnf-di-motogp-2024
+https://sport.detik.com/sport-lain/d-7074316/kembangkan-biliar-raffi-ahmad-ingin-tiru-ronaldo-dan-messi
+https://sport.detik.com/sport-lain/d-7074281/atlet-perbafi-raih-dua-emas-di-wff-malaysia-pro-qualifier-2023
+https://sport.detik.com/sport-lain/d-7074200/menpora-optimistis-indonesia-loloskan-banyak-atlet-ke-olimpiade
+https://sport.detik.com/sport-lain/d-7074152/tahun-depan-indonesia-jadi-tuan-rumah-turnamen-biliar-kelas-dunia
+https://sport.detik.com/sport-lain/d-7074190/indonesia-bisa-berprestasi-di-cabor-teqball
+https://sport.detik.com/basket/d-7073609/ibl-gandeng-b-league-demi-tingkatkan-kualitas-kompetisi-basket
+https://sport.detik.com/moto-gp/d-7073130/jorge-lorenzo-bertaruh-marc-marquez-juara-dunia-pakai-motor-ducati
+https://sport.detik.com/moto-gp/d-7072983/jorge-martin-jadi-runner-up-motogp-2023-bekal-untuk-musim-depan
+https://sport.detik.com/raket/d-7072873/ranking-terbaru-race-to-paris-2024-dejan-glo-naik-5-tingkat
+https://sport.detik.com/moto-gp/d-7072751/marquez-masih-tidak-tertarik-pindah-ke-f1
+https://sport.detik.com/moto-gp/d-7072565/rider-paling-sering-jatuh-di-motogp-2023-adalah
+https://sport.detik.com/sport-lain/d-7072390/menembak-ikut-sumbang-emas-di-world-abilitysport-games-2023
+https://sport.detik.com/sport-lain/d-7072389/pajajaran-esports-bogor-juara-liga-esports-nasional-2023
+https://sport.detik.com/sport-lain/d-7071648/atlet-para-cycling-ri-raih-3-emas-di-world-abilitysport-games-2023
+https://sport.detik.com/raket/d-7071196/demi-medali-olimpiade-gregoria-bertekad-lebih-stabil-tahun-depan
+https://sport.detik.com/raket/d-7071134/gregoria-waspadai-faktor-nonteknis-di-bwf-world-tour-finals
+https://sport.detik.com/raket/d-7070979/jelang-world-tour-finals-2023-bagaimana-otot-lutut-ginting
+https://sport.detik.com/sport-lain/d-7070509/asian-le-mans-series-sepang-tak-menyenangkan-untuk-sean
+https://sport.detik.com/moto-gp/d-7070341/marc-marquez-semoga-aku-bisa-jadi-rider-honda-lagi
+https://sport.detik.com/raket/d-7070103/gregoria-cahyadi-menangi-laga-ekshibisi-bni-bright-up-cup-2023
+https://sport.detik.com/raket/d-7070024/hasil-bni-bright-up-cup-2023-tim-liliyana-menang-atas-tim-apriyani
+https://sport.detik.com/raket/d-7069946/bni-bright-up-cup-rinov-mentari-menang-tim-apriyani-makin-unggul
+https://sport.detik.com/raket/d-7069939/bni-bright-up-cup-eng-hian-tontowi-sumbang-kemenangan-bagi-tim-apriyani
+https://sport.detik.com/basket/d-7069667/jadi-kontestan-baru-ibl-kesatria-bengawan-solo-target-lolos-playoff
+https://sport.detik.com/raket/d-7069908/india-international-2023-dejan-gloria-juara
+https://sport.detik.com/raket/d-7069572/tekad-anthony-ginting-tutup-akhir-tahun-dengan-manis
+https://sport.detik.com/raket/d-7069518/india-international-2023-head-to-head-dejan-gloria-vs-kaneko-matsutomo
+https://sport.detik.com/raket/d-7069356/live-streaming-bni-bright-up-cup-2023-nonton-langsung-di-sini
+https://sport.detik.com/sport-lain/d-7069073/asian-le-mans-series-2023-race-1-sepang-tak-mudah-untuk-sean
+https://sport.detik.com/sport-lain/d-7069050/playoff-liga-esports-nasional-2023-dimulai-akhir-pekan-ini
+https://sport.detik.com/raket/d-7068867/besok-bintang-bintang-olimpiade-tampil-di-bni-bright-up-cup-2023
+https://sport.detik.com/moto-gp/d-7068676/komentar-valentino-rossi-lihat-marc-marquez-gabung-ke-ducati
+https://sport.detik.com/sport-lain/d-7068051/jadwal-megawati-red-sparks-di-putaran-3-liga-voli-korea
+https://sport.detik.com/raket/d-7067618/rafael-nadal-umumkan-comeback-awal-tahun-depan
+https://sport.detik.com/sport-lain/d-7067458/asian-le-mans-series-gabung-tim-baru-bagaimana-adaptasi-sean
+https://sport.detik.com/sport-lain/d-7067398/federasi-triathlon-indonesia-siap-sukseskan-sportel-bali-triathlon-2024
+https://sport.detik.com/basket/d-7067359/satria-muda-rekrut-eks-pemain-asing-prawira-jarred-shaw
+https://sport.detik.com/g-sport/d-7067249/jonatan-christie-resmi-nikahi-shanju-eks-jkt48
+https://sport.detik.com/raket/d-7066950/6-wakil-indonesia-di-bwf-world-tour-finals-2023
+https://sport.detik.com/moto-gp/d-7066883/marc-marquez-kencang-bersama-gresini-apa-kata-rider-ducati-lainnya
+https://sport.detik.com/sport-lain/d-7066828/cari-desak-made-baru-fpti-gelar-kejurnas-panjat-tebing
+https://sport.detik.com/raket/d-7066266/apriyani-rahayu-di-antara-turnamen-olimpiade-dan-cedera
+https://sport.detik.com/detiksport/d-7066084/carragher-vs-ronaldo-dan-messi
+https://sport.detik.com/sport-lain/d-7065683/debut-di-kejuaraan-dunia-teqball-indonesia-dapat-pengalaman-berharga
+https://sport.detik.com/raket/d-7065431/pelatih-pede-jonatan-dan-ginting-juara-wtf-kenapa
+https://sport.detik.com/moto-gp/d-7065304/bagnaia-puas-dengan-motor-baru-ducati-tapi-bisa-lebih-oke-lagi
+https://sport.detik.com/raket/d-7065359/bwf-world-tour-finals-2023-gregoria-vs-2-lawan-super-berat
+https://sport.detik.com/moto-gp/d-7065185/marc-marquez-habis-operasi-tangan-kanan-lagi
+https://sport.detik.com/moto-gp/d-7065061/bezzecchi-akui-memang-semarah-itu-sama-marquez-di-valencia-tapi
+https://sport.detik.com/moto-gp/d-7065021/diggia-sudah-seperti-di-rumah-bersama-vr46-racing-team
+https://sport.detik.com/raket/d-7064696/bagaimana-nasib-kevin-marcus-tahun-depan
+https://sport.detik.com/raket/d-7064666/siasat-aryono-miranat-untuk-bagas-dan-fajar-jelang-bwf-world-tour-finals
+https://sport.detik.com/raket/d-7064170/misi-anthony-ginting-di-bwf-world-tour-finals-2023-juara
+https://sport.detik.com/sport-lain/d-7063850/richard-gautama-pengusaha-yang-dukung-binaraga-ri-ke-kancah-global
+https://sport.detik.com/moto-gp/d-7063416/marquez-ke-ducati-pabrikan-lain-pasti-cemberut
+https://sport.detik.com/moto-gp/d-7063287/honda-tak-kaget-marc-marquez-melesat-dengan-motor-ducati
+https://sport.detik.com/raket/d-7063309/kondisi-terkini-cedera-apriyani-rahayu-jelang-world-tour-finals-2023
+https://sport.detik.com/moto-gp/d-7063009/makna-senyum-merekah-marquez-usai-tunggangi-motor-ducati
+https://sport.detik.com/raket/d-7063167/jawaban-bagas-fikri-disindir-world-tour-finals-jalur-giveaway
+https://sport.detik.com/raket/d-7063169/india-international-2023-rayhan-marcus-langsung-tumbang
+https://sport.detik.com/raket/d-7063123/bni-bright-up-cup-2023-hadir-di-surabaya-tampilkan-bintang-olimpiade
+https://sport.detik.com/raket/d-7062968/jonatan-christie-menikah-pekan-ini-latihan-di-pelatnas-jalan-terus
+https://sport.detik.com/raket/d-7062919/bagas-fikri-senang-lolos-ke-world-tour-finals-2023-tapi
+https://sport.detik.com/moto-gp/d-7062343/kok-marc-marquez-masih-cantumkan-repsol-honda-team-di-medsosnya
+https://sport.detik.com/moto-gp/d-7061900/tes-motogp-valencia-marc-marquez-oke-juga-geber-ducati
+https://sport.detik.com/raket/d-7061881/daftar-pebulutangkis-yang-lolos-ke-bwf-world-tour-finals-2023
+https://sport.detik.com/moto-gp/d-7061822/tes-motogp-valencia-2023-vinales-tercepat-marc-marquez-keempat
+https://sport.detik.com/sport-lain/d-7061794/alvin-avila-bahar-runner-up-di-balapan-sepang-1-000-km
+https://sport.detik.com/sport-lain/d-7061310/pabsi-kirim-11-atlet-ke-doha-ikuti-kualifikasi-olimpiade-2024
+https://sport.detik.com/raket/d-7061152/ranking-bwf-terbaru-jonatan-christie-tergeser-dari-3-besar-dunia
+https://sport.detik.com/raket/d-7060597/jadwal-tanding-wakil-indonesia-di-syed-modi-india-international-2023
+https://sport.detik.com/moto-gp/d-7060293/daftar-lengkap-22-rider-motogp-2024
+https://sport.detik.com/raket/d-7060366/marcus-gideon-rayhan-debut-indonesia-kirim-5-wakil-ke-turnamen-india
+https://sport.detik.com/moto-gp/d-7060265/penampakan-pertama-marc-marquez-tunggangi-motor-ducati
+https://sport.detik.com/sport-lain/d-7060223/meriahnya-sma-se-bandung-adu-bakat-olahraga-di-yamaha-youth-festival
+https://sport.detik.com/raket/d-7059845/pesan-alan-budikusuma-bulutangkis-menjanjikan-orangtua-harus-dukung
+https://sport.detik.com/moto-gp/d-7059829/rnf-didepak-dari-motogp-2024
+https://sport.detik.com/sport-lain/d-7059818/aquabike-jetski-world-championship-2023-selesai-ini-hasilnya
+https://sport.detik.com/moto-gp/d-7059451/motogp-valencia-2023-positif-untuk-diggia
+https://sport.detik.com/raket/d-7059719/mulai-rp-90-ribu-ini-daftar-harga-tiket-indonesia-masters-2024
+https://sport.detik.com/sport-lain/d-7059687/federasi-mma-indonesia-resmi-dibentuk
+https://sport.detik.com/sport-lain/d-7059676/brave-cf-mau-ikut-bangkitkan-mma-indonesia
+https://sport.detik.com/raket/d-7059448/gregoria-penasaran-tembus-semifinal-world-tour-finals
+https://sport.detik.com/sport-lain/d-7059517/ketua-umum-koni-pusat-lantik-pengurus-baru-triathlon-indonesia
+https://sport.detik.com/sport-lain/d-7059662/kejurnas-imi-adventure-off-road-putaran-kedua-tuntas-digelar
+https://sport.detik.com/sport-lain/d-7059584/kejuaraan-atletik-pelajar-di-jawa-tengah-tuntas-ada-rekor-tercipta
+https://sport.detik.com/raket/d-7059033/2-target-jonatan-christie-di-indonesia-masters-2024
+https://sport.detik.com/moto-gp/d-7059431/diggia-resmi-berlabuh-di-vr46-racing-team
+https://sport.detik.com/moto-gp/d-7059174/luca-marini-resmi-ke-honda
+https://sport.detik.com/moto-gp/d-7058846/diggia-ucapkan-salam-perpisahan-ke-gresini-racing-dengan-manis
+https://sport.detik.com/raket/d-7059029/bwf-indonesia-masters-2024-digelar-23-januari
+https://sport.detik.com/sport-lain/d-7058743/total-pengunjung-aquabike-jetski-world-championship-tembus-200-ribu-orang
+https://sport.detik.com/sport-lain/d-7058477/pengertian-lari-estafet-aturan-dan-teknik-pergantian-tongkat-yang-benar
+https://sport.detik.com/raket/d-7058250/jonatan-dan-ginting-dihantui-beberapa-masalah-jelang-world-tour-finals
+https://sport.detik.com/moto-gp/d-7058139/daftar-juara-dunia-motogp-bagnaia-kuasai-dua-musim-terakhir
+https://sport.detik.com/moto-gp/d-7058108/jorge-martin-selamat-pecco
+https://sport.detik.com/basket/d-7058050/jelang-ibl-2024-hangtuah-ingin-gaet-fans-baru
+https://sport.detik.com/moto-gp/d-7058036/bagnaia-juara-dunia-motogp-2023-patahkan-kutukan-nomor-1
+https://sport.detik.com/moto-gp/d-7057936/martin-rusak-perpisahan-marquez-dengan-repsol-honda
+https://sport.detik.com/moto-gp/d-7057916/bagnaia-tak-pernah-sebahagia-ini
+https://sport.detik.com/sport-lain/d-7057909/semoga-lebih-banyak-turnamen-golf-tahun-depan
+https://sport.detik.com/moto-gp/d-7057912/francesco-bagnaia-murid-rossi-itu-pertahankan-gelar-juara-dunia-motogp
+https://sport.detik.com/sport-lain/d-7057903/sean-gelael-finis-kesembilan-di-grand-finale-aprc-2023
+https://sport.detik.com/moto-gp/d-7057900/bagnaia-juara-dunia-motogp-lagi-ikuti-jejak-rossi-dan-marquez
+https://sport.detik.com/f1/d-7057896/hasil-f1-gp-abu-dhabi-2023-verstappen-menangi-balapan-terakhir
+https://sport.detik.com/moto-gp/d-7057883/klasemen-motogp-2023-usai-balapan-valencia-bagnaia-nomor-1-martin-kedua
+https://sport.detik.com/moto-gp/d-7057850/hasil-motogp-valencia-2023-banyak-rider-jatuh-bagnaia-pemenangnya
+https://sport.detik.com/sport-lain/d-7057835/selamat-tim-voli-sman-72-jakarta-juarai-classy-yamaha-youth-festival
+https://sport.detik.com/moto-gp/d-7057812/motogp-valencia-2023-francesco-bagnaia-juaranya-juga-jadi-juara-dunia
+https://sport.detik.com/moto-gp/d-7057801/motogp-valencia-2023-jack-miller-jatuh-pecco-kini-terdepan
+https://sport.detik.com/moto-gp/d-7057799/francesco-bagnaia-juara-dunia-motogp-2023
+https://sport.detik.com/moto-gp/d-7057792/motogp-valencia-2023-setengah-balapan-5-rider-jadi-korban
+https://sport.detik.com/moto-gp/d-7057781/motogp-valencia-2023-jorge-martin-jatuh
+https://sport.detik.com/moto-gp/d-7057777/motogp-valencia-2023-martin-melebar-setelah-senggolan-sama-bagnaia
+https://sport.detik.com/moto-gp/d-7057731/jorge-martin-akan-promosi-ke-ducati-jika-jadi-juara-dunia-motogp-2023
+https://sport.detik.com/moto-gp/d-7057653/vinales-kena-penalti-bagnaia-tempati-pole-motogp-valencia-2023
+https://sport.detik.com/moto-gp/d-7057543/final-motogp-2023-bagnaia-vs-martin-ini-prediksi-valentino-rossi
+https://sport.detik.com/moto-gp/d-7057231/starting-grid-motogp-valencia-2023-bagnaia-kedua-martin-keenam
+https://sport.detik.com/raket/d-7057562/china-masters-2023-tuan-rumah-rebut-3-gelar-juara
+https://sport.detik.com/moto-gp/d-7057354/link-live-streaming-motogp-valencia-2023-siaran-langsung-di-trans7
+https://sport.detik.com/moto-gp/d-7057230/persiapan-francesco-bagnaia-jelang-final-motogp-2023
+https://sport.detik.com/moto-gp/d-7056882/motogp-valencia-2023-syarat-bagnaia-dan-martin-jadi-juara-dunia
+https://sport.detik.com/moto-gp/d-7056748/jadwal-motogp-valencia-2023-race-penentu-juara-bagnaia-vs-martin
+https://sport.detik.com/sport-lain/d-7056682/panjat-tebing-indonesia-dominasi-podium-ifsc-masters-neom-2023
+https://sport.detik.com/sport-lain/d-7056640/indonesia-jadi-tuan-rumah-kejuaraan-atletik-master-asia-2025
+https://sport.detik.com/sport-lain/d-7056461/atlet-bmx-nilna-murni-ingin-lebih-berkilau-tahun-depan
+https://sport.detik.com/sport-lain/d-7056505/mobil-bermasalah-sean-gagal-tuntaskan-hari-kedua-aprc-2023
+https://sport.detik.com/f1/d-7056599/kualifikasi-f1-gp-abu-dhabi-2023-verstappen-rebut-pole-position
+https://sport.detik.com/moto-gp/d-7056565/klasemen-motogp-2023-usai-sprint-race-valencia-pecco-dan-martin-beda-14-poin
+https://sport.detik.com/moto-gp/d-7056486/hasil-sprint-race-motogp-valencia-2023-jorge-martin-juaranya
+https://sport.detik.com/basket/d-7056375/tim-basket-sma-6-jubilee-raih-tiket-final-classy-yamaha-youth-festival
+https://sport.detik.com/raket/d-7056309/update-ranking-race-to-finals-indonesia-kirim-6-wakil
+https://sport.detik.com/moto-gp/d-7056189/hasil-kualifikasi-motogp-valencia-2023-bagnaia-start-di-depan-martin
+https://sport.detik.com/raket/d-7055964/evaluasi-untuk-fajar-rian-soal-cedera-kepercayaan-diri-determinasi
+https://sport.detik.com/raket/d-7055892/kepercayaan-diri-ganda-putra-indonesia-perlu-ditingkatkan
+https://sport.detik.com/moto-gp/d-7055752/jadwal-motogp-valencia-2023-sabtu-sore-kualifikasi-malam-sprint-race
+https://sport.detik.com/moto-gp/d-7055678/karena-jorge-martin-memang-mau-beri-tekanan-pada-bagnaia
+https://sport.detik.com/moto-gp/d-7055399/aksi-martin-ke-bagnaia-dikritik-bos-ducati-dibela-marquez
+https://sport.detik.com/sport-lain/d-7055383/pebalap-hungaria-kuasai-hari-ketiga-aquabike-jetski-world-championship
+https://sport.detik.com/sport-lain/d-7055402/kejuaraan-atletik-pelajar-di-jateng-meningkat-dua-kali-lipat
+https://sport.detik.com/sport-lain/d-7055381/sean-dan-subhan-kuasai-hari-pertama-grand-finale-aprc-2023
+https://sport.detik.com/moto-gp/d-7055314/hasil-practice-motogp-valencia-2023-vinales-tercepat-bagnaia-q1
+https://sport.detik.com/raket/d-7055289/china-masters-2023-pram-yere-tumbang-indonesia-tanpa-gelar
+https://sport.detik.com/sport-lain/d-7055256/pembibitan-atlet-wing-chun-dapat-dukungan
+https://sport.detik.com/sport-lain/d-7055105/indonesia-kalahkan-kamboja-di-bali-bash-international-t20i-series-20023
+https://sport.detik.com/moto-gp/d-7054859/hasil-fp1-motogp-valencia-2023-johann-zarco-tercepat
+https://sport.detik.com/raket/d-7054759/china-masters-2023-leo-daniel-disingkirkan-unggulan-pertama
+https://sport.detik.com/sport-lain/d-7054740/diskon-eksklusif-bank-mega-tawarkan-pengalaman-bermain-golf-mewah
+https://sport.detik.com/raket/d-7054045/head-to-head-leo-daniel-vs-reddy-shetty-the-babies-0-kemenangan
+https://sport.detik.com/sport-lain/d-7053696/pebalap-prancis-berjaya-di-awal-aquabike-jetski-world-championship-2023
+https://sport.detik.com/raket/d-7053636/jadwal-china-masters-2023-hari-ini-cuma-2-wakil-ri-di-babak-8-besar
+https://sport.detik.com/sport-lain/d-7053551/gunung-kendil-madiun-gelar-kejurnas-adventure-off-road-putaran-2
+https://sport.detik.com/sport-lain/d-7053537/hadapi-grand-finale-aprc-2023-sean-gelael-siap-gaspol
+https://sport.detik.com/raket/d-7053445/apri-fadia-jelaskan-alasan-mundur-dari-china-masters-2023
+https://sport.detik.com/raket/d-7053340/china-masters-2023-pram-yere-melaju-fajar-rian-tersingkir
+https://sport.detik.com/sport-lain/d-7053303/besok-sma-se-bandung-adu-bakat-olahraga-di-classy-yamaha-youth-festival
+https://sport.detik.com/raket/d-7053253/china-masters-2023-apriyani-fadia-retired-karena-cedera
+https://sport.detik.com/sport-lain/d-7053230/rivan-nurmulki-dilarang-main-setahun-di-turnamen-voli-internasional
+https://sport.detik.com/sport-lain/d-7053091/gelar-kejuaraan-tarkam-di-sorong-menpora-dipuji
+https://sport.detik.com/raket/d-7052772/china-masters-2023-ahsan-hendra-disingkirkan-wakil-tuan-rumah
+https://sport.detik.com/raket/d-7052580/tekad-bangkit-rinov-mentari-agar-lebih-baik-tahun-depan
+https://sport.detik.com/raket/d-7052499/lolos-8-besar-leo-daniel-bertekad-main-lebih-baik-lagi
+https://sport.detik.com/raket/d-7052487/china-masters-dejan-glo-gagal-ke-perempatfinal-akui-keunggulan-lawan
+https://sport.detik.com/raket/d-7052310/kata-anthony-ginting-usai-tersingkir-di-16-besar-china-masters-2023
+https://sport.detik.com/raket/d-7052296/hasil-china-masters-2023-leo-daniel-melaju-ke-perempatfinal
+https://sport.detik.com/raket/d-7052222/gagal-di-china-masters-2023-gregoria-petik-banyak-pelajaran
+https://sport.detik.com/raket/d-7052156/hasil-china-masters-2023-dejan-gloria-kandas-di-16-besar
+https://sport.detik.com/raket/d-7052013/hasil-china-masters-2023-anthony-ginting-kalah-tunggal-putra-habis
+https://sport.detik.com/raket/d-7051853/hasil-china-masters-2023-gregoria-tersingkir-di-babak-16-besar
+https://sport.detik.com/moto-gp/d-7051656/skenario-juara-bagnaia-di-sprint-race-motogp-valencia-2023
+https://sport.detik.com/raket/d-7051576/jadwal-china-masters-2023-hari-ini-9-wakil-ri-kejar-tiket-8-besar
+https://sport.detik.com/sport-lain/d-7051588/ini-cara-agar-aquabike-jetski-di-danau-toba-aman-dan-lancar
+https://sport.detik.com/sport-lain/d-7051582/aquabike-jetski-world-championship-harus-bisa-dinikmati-semua-kalangan
+https://sport.detik.com/raket/d-7051484/china-masters-2023-ahsan-hendra-siap-hadapi-ganda-nomor-1-dunia
+https://sport.detik.com/sport-lain/d-7051552/lintasan-aquabike-jetski-danau-toba-dipastikan-aman
+https://sport.detik.com/raket/d-7051442/hasil-china-masters-2023-praveen-melati-kandas-di-babak-pertama
+https://sport.detik.com/raket/d-7051223/tersingkir-dari-china-masters-2023-rehan-lisa-akui-main-buru-buru
+https://sport.detik.com/raket/d-7051220/tekad-dan-harapan-bagas-fikri-usai-kandas-di-babak-pertama-lagi
+https://sport.detik.com/raket/d-7051201/hasil-china-masters-2023-chico-langsung-out-di-babak-pertama
+https://sport.detik.com/raket/d-7051184/hasil-china-masters-2023-hendra-ahsan-lewati-babak-pertama
+https://sport.detik.com/moto-gp/d-7050915/motogp-luca-marini-di-tahap-akhir-negosiasi-dengan-honda
+https://sport.detik.com/raket/d-7050795/anthony-ginting-fokus-kembalikan-stamina-usai-laga-alot
+https://sport.detik.com/raket/d-7050786/hasil-china-masters-2023-rehan-lisa-kalah-dari-wakil-tuan-rumah
+https://sport.detik.com/raket/d-7050652/hasil-china-masters-2023-bagas-fikri-langsung-tersingkir
+https://sport.detik.com/raket/d-7050515/china-masters-2023-fajar-rian-waspadai-kekuatan-baru-wakil-tuan-rumah
+https://sport.detik.com/raket/d-7050271/china-masters-2023-anthony-ginting-kalahkan-loh-kean-yew
+https://sport.detik.com/raket/d-7050214/gregoria-sempat-kesulitan-adaptasi-dulu-dengan-kondisi-lapangan
+https://sport.detik.com/raket/d-7049931/china-masters-2023-gregoria-menang-mudah-fajar-rian-lolos
+https://sport.detik.com/raket/d-7049729/jadwal-china-masters-2023-hari-ini-8-wakil-indonesia-bertanding
+https://sport.detik.com/moto-gp/d-7049777/motogp-valencia-2023-menantikan-balapan-emosional-marc-marquez
+https://sport.detik.com/sport-lain/d-7049758/indonesia-sabet-emas-di-kejuaraan-dunia-wushu-2023
+https://sport.detik.com/sport-lain/d-7049727/indonesia-rebut-emas-di-kejuaraan-woodball-internasional-2023
+https://sport.detik.com/moto-gp/d-7049752/bagnaia-persaingan-titel-motogp-2023-terberat-dalam-karierku
+https://sport.detik.com/sport-lain/d-7049732/pesta-rakyat-dulu-baru-aquabike-jetski-world-championship-2023
+https://sport.detik.com/moto-gp/d-7049044/jadwal-motogp-valencia-akhir-pekan-ini
+https://sport.detik.com/raket/d-7048962/ana-tiwi-absen-di-china-masters-2023-pelatih-ada-masalah-visa
+https://sport.detik.com/sport-lain/d-7048969/bangga-2-pegawai-badak-lng-jadi-juara-di-turnamen-golf-internasional
+https://sport.detik.com/raket/d-7048934/ranking-bwf-pekan-ini-jonatan-dekati-anthony-ginting
+https://sport.detik.com/raket/d-7048838/hasil-china-masters-2023-leo-daniel-melaju-mulus-ke-16-besar
+https://sport.detik.com/raket/d-7048626/gelar-juara-gregoria-oasis-di-tengah-paceklik-sektor-ganda
+https://sport.detik.com/raket/d-7048624/china-masters-2023-apri-fadia-dan-pram-yere-menang-wo
+https://sport.detik.com/raket/d-7048383/tekad-gregoria-mariska-raih-gelar-di-turnamen-lebih-besar
+https://sport.detik.com/raket/d-7048483/hasil-china-masters-2023-rinov-pitha-dan-dejan-gloria-lanjut-ke-babak-kedua
+https://sport.detik.com/raket/d-7048330/gregoria-juara-pbsi-pembinaan-di-tunggal-putri-berjalan-baik
+https://sport.detik.com/raket/d-7048168/china-masters-2023-mulai-hari-ini-semoga-gregoria-unjuk-gigi-lagi
+https://sport.detik.com/moto-gp/d-7047973/jelang-motogp-valencia-2023-deja-vu-pecco-bagnaia
+https://sport.detik.com/sport-lain/d-7047980/ayah-anak-juara-nasional-lagi-di-issom-2023-alvin-dan-avila-bahar
+https://sport.detik.com/raket/d-7047769/cedera-jonatan-christie-mundur-dari-china-masters-2023
+https://sport.detik.com/sport-lain/d-7047798/sportel-bali-triathlon-dihelat-februari-2024
+https://sport.detik.com/sport-lain/d-7047796/issom-2023-target-juara-terpenuhi-dypo-fitra-puas
+https://sport.detik.com/sport-lain/d-7047762/cilegon-baru-saja-gelar-turnamen-golf-akhir-pekan-kemarin
+https://sport.detik.com/raket/d-7047382/kekurangan-jonatan-dkk-tak-banyak-tapi
+https://sport.detik.com/moto-gp/d-7047161/habis-menang-di-lusail-diggia-bidik-perpisahan-manis-dengan-gresini
+https://sport.detik.com/sport-lain/d-7047119/jeka-saragih-menang-di-ufc-bukti-jangan-remehkan-si-tendangan-maut
+https://sport.detik.com/raket/d-7047061/indonesia-turunkan-15-wakil-di-china-master-2023-apri-fadia-main
+https://sport.detik.com/sport-lain/d-7046839/kans-indonesia-loloskan-banyak-atlet-ke-paris-2024
+https://sport.detik.com/moto-gp/d-7046736/ungguli-jorge-martin-21-poin-bagnaia-belum-bisa-tenang
+https://sport.detik.com/raket/d-7046733/ganda-putra-ri-tak-sesuai-harapan-di-japan-masters-2023
+https://sport.detik.com/raket/d-7046480/gregoria-mariska-bersiap-main-di-china-masters-2023
+https://sport.detik.com/sport-lain/d-7046345/gaganjeet-bhullar-juara-turnamen-golf-bni-indonesian-masters-2023
+https://sport.detik.com/raket/d-7046263/jokowi-ucapkan-selamat-gregoria-mariska-tunjung-terima-kasih-pak
+https://sport.detik.com/moto-gp/d-7045932/asa-juara-jorge-martin-masih-ada-di-valencia
+https://sport.detik.com/moto-gp/d-7045832/motogp-qatar-2023-jorge-martin-gagal-podium-salahkan-ban
+https://sport.detik.com/moto-gp/d-7045801/klasemen-motogp-2023-bagnaia-menjauh-dari-martin
+https://sport.detik.com/moto-gp/d-7045761/italiano-berjaya-di-motogp-qatar-2023-fabio-di-giannantonio-juaranya
+https://sport.detik.com/moto-gp/d-7045755/hasil-motogp-qatar-2023-di-giannantonio-sabet-kemenangan-perdana
+https://sport.detik.com/sport-lain/d-7045745/pegolf-gaganjeet-bhullar-ukir-sejarah-usai-juara-indonesia-masters-2023
+https://sport.detik.com/raket/d-7045683/gregoria-mariska-ukir-sejarah-usai-juara-japan-masters-2023
+https://sport.detik.com/moto-gp/d-7045280/motogp-qatar-duo-gresini-racing-incar-podium-dari-baris-terdepan
+https://sport.detik.com/moto-gp/d-7045022/starting-grid-motogp-qatar-marini-pole-bagnaia-keempat-martin-kelima
+https://sport.detik.com/sport-lain/d-7045493/diikuti-ratusan-peserta-jakarta-horse-show-jumping-2023-sukses-digelar
+https://sport.detik.com/moto-gp/d-7045331/link-live-streaming-motogp-qatar-2023-siaran-langsung-di-trans7
+https://sport.detik.com/f1/d-7045347/hasil-f1-gp-las-vegas-2023-verstappen-juara
+https://sport.detik.com/raket/d-7045268/hasil-lengkap-japan-masters-2023-indonesia-1-gelar-juara
+https://sport.detik.com/moto-gp/d-7045177/motogp-qatar-luca-marini-bingung-dengan-pilihan-ban
+https://sport.detik.com/raket/d-7044900/kalahkan-peraih-emas-olimpiade-gregoria-terbaik-di-japan-masters
+https://sport.detik.com/sport-lain/d-7044878/jeka-saragih-habis-menang-di-ufc-ingin-pulang-kampung
+https://sport.detik.com/moto-gp/d-7044830/jadwal-motogp-qatar-2023-race-start-tengah-malam-nanti
+https://sport.detik.com/raket/d-7044809/hasil-final-japan-masters-2023-gregoria-mariska-juara
+https://sport.detik.com/sport-lain/d-7044686/tim-berkuda-dki-targetkan-juara-umum-pon-2024
+https://sport.detik.com/sport-lain/d-7044570/kata-kata-jeka-saragih-usai-raih-kemenangan-bersejarah-di-ufc
+https://sport.detik.com/sport-lain/d-7044569/sejarah-jeka-saragih-jadi-fighter-indonesia-pertama-menang-di-ufc
+https://sport.detik.com/moto-gp/d-7044577/pukul-morbidelli-aleix-espargaro-dihukum-penalti-6-posisi-denda
+https://sport.detik.com/moto-gp/d-7044549/klasemen-motogp-2023-terkini-martin-berjarak-7-poin-dari-bagnaia
+https://sport.detik.com/sport-lain/d-7044556/jeka-saragih-menang-ko-atas-lucas-alexander-di-debut-ufc
+https://sport.detik.com/sport-lain/d-7044548/gimana-rasanya-adu-cepat-dengan-tim-balap-sepeda-terbaik-asia
+https://sport.detik.com/moto-gp/d-7044507/hasil-sprint-race-motogp-qatar-2023-jorge-martin-juara-bagnaia-kelima
+https://sport.detik.com/sport-lain/d-7044493/skuter-tuning-vol-2-mending-kebut-kebutan-di-lintasan-balap
+https://sport.detik.com/moto-gp/d-7044306/hasil-kualifikasi-motogp-qatar-pecahkan-rekor-marini-raih-pole
+https://sport.detik.com/sport-lain/d-7044283/link-live-streaming-jeka-saragih-tarung-di-ufc-dini-hari-nanti
+https://sport.detik.com/moto-gp/d-7044252/hasil-fp2-motogp-qatar-quartararo-tercepat
+https://sport.detik.com/moto-gp/d-7044252/hasil-fp2-motogp-qatar-quartararo-tercepat
+https://sport.detik.com/raket/d-7044236/gregoria-mariska-kejar-gelar-kedua-di-tahun-2023
+https://sport.detik.com/sport-lain/d-7044205/bni-indonesian-masters-2023-kevin-akbar-lolos-cut-off
+https://sport.detik.com/f1/d-7044016/hasil-kualifikasi-f1-gp-las-vegas-leclerc-rebut-pole
+https://sport.detik.com/sport-lain/d-7043976/pp-perpani-gelar-kualifikasi-pon-2024-aceh-sumut-juga-diikuti-atlet-pelatnas
+https://sport.detik.com/moto-gp/d-7043842/jadwal-motogp-qatar-2023-sprint-race-tengah-malam-nanti
+https://sport.detik.com/basket/d-7043816/satria-muda-gandeng-pelatih-spanyol-menatap-musim-ibl-2024
+https://sport.detik.com/raket/d-7043746/final-japan-masters-2023-fokus-gregoria-jelang-jumpa-chen-yu-fei
+https://sport.detik.com/raket/d-7043612/lolos-final-lagi-kini-jepang-jadi-negara-favorit-gregoria-mariska
+https://sport.detik.com/raket/d-7043519/japan-masters-2023-gregoria-lanjut-ke-final
+https://sport.detik.com/raket/d-7043472/sambut-hut-ke-50-hotel-borobudur-gaet-pelti-gelar-turnamen-tenis
+https://sport.detik.com/raket/d-7043461/head-to-head-gregoria-vs-zhang-jelang-semifinal-japan-masters-2023
+https://sport.detik.com/raket/d-7043239/jadwal-japan-masters-2023-hari-ini-gregoria-berburu-tiket-final
+https://sport.detik.com/sport-lain/d-7043228/wusuh-indonesia-dipuji-di-kongres-iwuf-2023
+https://sport.detik.com/moto-gp/d-7043214/hasil-practice-motogp-qatar-2023-raul-fernandez-tercepat
+https://sport.detik.com/moto-gp/d-7042978/hasil-fp1-motogp-qatar-jorge-martin-tercepat
+https://sport.detik.com/sport-lain/d-7042793/mepet-olimpiade-asian-indoor-and-martial-arts-games-ditunda
+https://sport.detik.com/moto-gp/d-7042575/motogp-qatar-2023-bisa-kunci-titel-juara-dunia-bagnaia
+https://sport.detik.com/moto-gp/d-7042508/motogp-qatar-2023-jorge-martin-bidik-kemenangan-akan-ambil-risiko
+https://sport.detik.com/raket/d-7042477/kata-jonatan-christie-usai-disingkirkan-viktor-axelsen
+https://sport.detik.com/sport-lain/d-7042463/3-langkah-teknik-lari-jarak-pendek-ketahui-peraturannya
+https://sport.detik.com/raket/d-7042302/duet-kevin-rahmat-di-tahun-ini-selesai-tahun-depan-belum-tahu
+https://sport.detik.com/raket/d-7042146/hasil-japan-masters-2023-jojo-didepak-axelsen-di-perempatfinal
+https://sport.detik.com/raket/d-7041878/misi-gregoria-mariska-main-lebih-baik-demi-kalahkan-zhang-beiwen
+https://sport.detik.com/g-sport/d-7041708/mike-tyson-klarifikasi-kehadirannya-di-acara-tentara-israel
+https://sport.detik.com/sport-lain/d-7041629/bni-indonesian-masters-berlangsung-ketat-pegolf-india-pimpin-posisi
+https://sport.detik.com/raket/d-7041555/japan-masters-2023-gregoria-lanjut-ke-semifinal
+https://sport.detik.com/raket/d-7041337/jadwal-japan-masters-2023-hari-ini-jonatan-vs-axelsen-di-perempatfinal
+https://sport.detik.com/g-sport/d-7041310/olahraga-lancar-nutrisi-pun-harus-dijaga
+https://sport.detik.com/sport-lain/d-7041159/bpjs-ketenagakerjaan-kemenpora-gencarkan-jaminan-sosial-atlet-indonesia
+https://sport.detik.com/moto-gp/d-7040903/luca-marini-akan-gabung-honda-joan-mir-khawatir-soal-ini
+https://sport.detik.com/sport-lain/d-7040872/gelar-kejuaraan-tarkam-pj-bupati-musi-banyuasin-bangga-ditunjuk-kemenpora
+https://sport.detik.com/raket/d-7040414/japan-masters-2023-pramudya-yeremia-kalah-ganda-putra-habis
+https://sport.detik.com/raket/d-7040311/japan-masters-2023-kevin-rahmat-kandas-di-babak-16-besar
+https://sport.detik.com/raket/d-7040170/jumpa-viktor-axelsen-jonatan-christie-tenangkan-pikiran-dulu
+https://sport.detik.com/raket/d-7039963/gregoria-mariska-enggan-remehkan-lawan-jaga-fokus-hadapi-8-besar
+https://sport.detik.com/raket/d-7039958/hasil-japan-masters-2023-jojo-maju-dramatis-ke-perempatfinal
+https://sport.detik.com/raket/d-7039865/main-kurang-tenang-rinov-mentari-disingkirkan-lawan
+https://sport.detik.com/raket/d-7039417/jadwal-16-besar-japan-masters-2023-kamis-16-november
+https://sport.detik.com/sport-lain/d-7039388/ada-jalan-sehat-penuh-warna-di-tangerang-bulan-depan
+https://sport.detik.com/g-sport/d-7039366/ketika-alumni-universitas-ini-bikin-turnamen-golf
+https://sport.detik.com/sport-lain/d-7039346/minahasa-gelar-ajang-olahraga-air-diikuti-7-negara
+https://sport.detik.com/raket/d-7039173/kevin-rahmat-jaga-fokus-di-babak-16-besar-japan-masters-2023
+https://sport.detik.com/raket/d-7038751/hasil-japan-masters-2023-gregoria-singkirkan-wakil-tuan-rumah
+https://sport.detik.com/raket/d-7038643/hasil-japan-masters-2023-kevin-rahmat-lolos-ke-16-besar
+https://sport.detik.com/raket/d-7038609/hasil-japan-masters-2023-ginting-kembali-kalah-dari-weng-hong-yang
+https://sport.detik.com/raket/d-7038458/kepercayaan-diri-jadi-kunci-kemenangan-jonatan-christie
+https://sport.detik.com/raket/d-7038366/mundur-di-jepang-putri-kw-sudah-rasakan-sakit-sejak-di-korea
+https://sport.detik.com/raket/d-7038276/hasil-japan-masters-2023-chico-disingkirkan-axelsen
+https://sport.detik.com/raket/d-7038123/hasil-japan-masters-2023-jonatan-mulus-lewati-babak-pertama
+https://sport.detik.com/raket/d-7038113/sesal-rehan-lisa-tak-kuasa-keluarkan-permainan-terbaiknya
+https://sport.detik.com/raket/d-7038087/hasil-japan-masters-2023-rehan-lisa-kalah-putri-kw-mundur
+https://sport.detik.com/sport-lain/d-7037895/turnamen-golf-bni-indonesian-masters-digelar-total-hadiah-us-1-5-juta
+https://sport.detik.com/raket/d-7037818/pram-yere-pelajari-gaya-main-liu-ou-jelang-babak-kedua-japan-masters
+https://sport.detik.com/raket/d-7037749/japan-masters-2023-rinov-mentari-menang-tapi-masih-banyak-evaluasi
+https://sport.detik.com/raket/d-7037444/hasil-japan-masters-2023-rinov-pitha-lewati-ujian-pertama
+https://sport.detik.com/raket/d-7037341/jadwal-japan-masters-2023-gregoria-vs-okuhara-chico-tantang-axelsen
+https://sport.detik.com/moto-gp/d-7037356/marc-marquez-nantikan-akhir-pekan-yang-sulit-di-motogp-qatar-2023
+https://sport.detik.com/sport-lain/d-7037292/100-ribu-penonton-akan-padati-aquabike-jetski-world-championship-2023
+https://sport.detik.com/sport-lain/d-7037268/ini-hasil-putaran-kelima-kejurnas-time-rally-2023
+https://sport.detik.com/raket/d-7036863/taufik-hidayat-bakal-tanding-tenis-mulyo-handoyo-direkrut-lagi
+https://sport.detik.com/raket/d-7036852/taufik-hidayat-soal-tim-pokja-olimpiade-tak-apa-terlambat-daripada
+https://sport.detik.com/raket/d-7036807/bagas-fikri-kecewa-berat-gagal-revans-lawan-koga-saito
+https://sport.detik.com/raket/d-7036746/hasil-japan-masters-2023-leo-daniel-tersingkir
+https://sport.detik.com/raket/d-7036685/hendra-ahsan-langsung-tersingkir-akui-lawan-tak-gampang-mati
+https://sport.detik.com/raket/d-7036409/hasil-japan-masters-2023-hendra-ahsan-dan-ana-tiwi-terhenti
+https://sport.detik.com/raket/d-7036255/hasil-japan-masters-2023-pram-yere-lanjut-bagas-fikri-kandas
+https://sport.detik.com/moto-gp/d-7036152/jadwal-motogp-qatar-2023-pekan-ini-persaingan-kian-panas
+https://sport.detik.com/raket/d-7035792/bagas-fikri-usung-tekad-revans-lawan-koga-saito
+https://sport.detik.com/raket/d-7035664/kevin-rahmat-mulai-padu
+https://sport.detik.com/raket/d-7035598/hendra-ahsan-antisipasi-energi-tinggi-kenya-hiroki
+https://sport.detik.com/raket/d-7035556/shesar-vito-gagal-manfaatkan-kesempatan-dikalahkan-kento-momota
+https://sport.detik.com/raket/d-7035260/jadwal-kumamoto-masters-2023-kevin-rahmat-mulai-dari-kualifikasi
+https://sport.detik.com/sport-lain/d-7035271/usai-kecelakaan-parah-di-jepang-gerry-salim-berjuang-bangkit
+https://sport.detik.com/sport-lain/d-7035042/bold-battle-of-legends-2023-tuntas-ada-lima-calon-atlet-sip-muncul
+https://sport.detik.com/raket/d-7034743/optimisme-ricky-soebagdja-soal-masa-depan-bulutangkis-menuju-paris-2024
+https://sport.detik.com/sport-lain/d-7034600/2-tiket-olimpiade-sudah-di-tangan-bukti-pembinaan-panjat-tebing-bagus
+https://sport.detik.com/moto-gp/d-7034246/motogp-malaysia-akhir-pekan-nyaris-sempurna-untuk-alex-marquez
+https://sport.detik.com/raket/d-7033998/apri-fadia-absen-ana-tiwi-jadi-andalan-ganda-putri-di-japan-masters-2023
+https://sport.detik.com/raket/d-7033833/indonesia-kirim-18-wakil-ke-japan-masters-2023-kevin-rahmat-main-lagi
+https://sport.detik.com/raket/d-7033700/jonatan-christie-bidik-gelar-juara-di-japan-masters-2023
+https://sport.detik.com/sport-lain/d-7033628/panjat-tebing-sudah-loloskan-2-atlet-ke-olimpiade-2024-terbaru-rahmad-adi
+https://sport.detik.com/moto-gp/d-7033311/francesco-bagnaia-dan-bayang-bayang-jorge-martin
+https://sport.detik.com/moto-gp/d-7033169/adik-valentino-rossi-merapat-ke-honda-marc-marquez-bilang-begini
+https://sport.detik.com/moto-gp/d-7033128/bagnaia-ungguli-jorge-martin-14-poin-bagus-tapi
+https://sport.detik.com/moto-gp/d-7033098/quartararo-didenda-rp-16-7-juta-karena-helm-kecam-steward
+https://sport.detik.com/sport-lain/d-7033024/uci-mtb-world-championship-2023-tuntas-wakil-indonesia-naik-podium
+https://sport.detik.com/sport-lain/d-7032813/legenda-panahan-indonesia-kusuma-wardhani-meninggal-dunia
+https://sport.detik.com/sport-lain/d-7032698/hasil-ufc-295-alex-pereira-juara-baru-kelas-berat-ringan
+https://sport.detik.com/moto-gp/d-7032631/bastianini-the-beast-is-back
+https://sport.detik.com/moto-gp/d-7032575/klasemen-motogp-2023-bagnaia-jaga-jarak-14-poin-dari-martin
+https://sport.detik.com/moto-gp/d-7032535/hasil-motogp-malaysia-2023-bastianini-juara-bagnaia-ketiga-martin-gagal
+https://sport.detik.com/moto-gp/d-7032517/motogp-malaysia-2023-bagnaia-terus-asapi-martin-bastianini-nyaman-di-depan
+https://sport.detik.com/moto-gp/d-7032502/motogp-malaysia-2023-salip-salipan-bagnaia-martin
+https://sport.detik.com/sport-lain/d-7032315/btn-jakarta-run-2023-dorong-dan-geliatkan-sport-tourism-jakarta
+https://sport.detik.com/sport-lain/d-7032311/pelari-berbagai-kalangan-lintas-negara-meriahkan-btn-jakarta-run-2023
+https://sport.detik.com/sport-lain/d-7032151/one-pride-mma-74-ronald-siahaan-sikat-angga-juara-baru-kelas-ringan
+https://sport.detik.com/basket/d-7031659/8-teknik-dasar-bola-basket-yang-wajib-diketahui-shooting-hingga-passing
+https://sport.detik.com/sport-lain/d-7032043/gagal-di-combine-ifsc-asia-qualifier-2023-speed-jadi-andalan-indonesia
+https://sport.detik.com/sport-lain/d-7032021/misi-perbakin-jelang-olimpiade-paris-2024
+https://sport.detik.com/sport-lain/d-7032020/cirebon-gelar-kejurnas-time-rally-ada-50-peserta
+https://sport.detik.com/sport-lain/d-7031905/sirkuit-sg-1973-diresmikan-untuk-uci-mtb-championship-2023
+https://sport.detik.com/sport-lain/d-7032004/pesta-rakyat-ramaikan-aquabike-jetski-world-championship-2023
+https://sport.detik.com/sport-lain/d-7031941/perbakin-dki-ditargetkan-raih-hasil-gemilang-di-pon-2024
+https://sport.detik.com/moto-gp/d-7031652/sprint-race-motogp-malaysia-2023-yang-sempurna-untuk-alex-marquez
+https://sport.detik.com/sport-lain/d-7031816/danau-toba-jadi-tuan-rumah-aquabike-jetski-world-championship
+https://sport.detik.com/raket/d-7031259/hasil-korea-masters-2023-ester-tumbang-indonesia-tanpa-gelar
+https://sport.detik.com/moto-gp/d-7031275/klasemen-motogp-2023-11-angka-jarak-jorge-martin-dari-bagnaia
+https://sport.detik.com/moto-gp/d-7031236/sprint-race-motogp-malaysia-alex-marquez-1-jorge-martin-2-bagnaia-3
+https://sport.detik.com/moto-gp/d-7031216/hasil-sprint-race-motogp-malaysia-2023-alex-marquez-pemenangnya
+https://sport.detik.com/moto-gp/d-7030996/hasil-kualifikasi-motogp-malaysia-2023-bagnaia-rebut-pole-dari-martin
+https://sport.detik.com/moto-gp/d-7030809/jadwal-sprint-race-motogp-malaysia-2023-start-siang-ini
+https://sport.detik.com/moto-gp/d-7030656/marc-marquez-pada-honda-percuma-punya-rider-bagus-kalau-motor-bapuk
+https://sport.detik.com/sport-lain/d-7030590/uci-mtb-world-championship-2023-mencari-juara-dunia-di-palangka-raya
+https://sport.detik.com/sport-lain/d-7030601/one-pride-mma-74-angga-vs-ronald-siahaan-sudah-panas-sebelum-naik-ring
+https://sport.detik.com/sport-lain/d-7030529/scooter-prix-2023-wadah-para-pelajar-menyalurkan-hobi-balap
+https://sport.detik.com/moto-gp/d-7029591/hasil-practice-motogp-malaysia-2023-alex-marquez-pertama-martin-kedua
+https://sport.detik.com/raket/d-7029366/hasil-korea-masters-2023-ester-tembus-semifinal
+https://sport.detik.com/sport-lain/d-7028585/ada-one-pride-mma-74-di-senayan-akhir-pekan-ini
+https://sport.detik.com/moto-gp/d-7028314/bagnaia-jorge-martin-ke-ducati-di-2024-tak-adil-untuk-bastianini
+https://sport.detik.com/moto-gp/d-7028177/marc-marquez-tak-ada-alasan-untuk-gagal-di-musim-depan
+https://sport.detik.com/g-sport/d-7028117/raja-muay-thai-ini-harap-suatu-hari-nanti-ditonton-messi
+https://sport.detik.com/raket/d-7028020/ini-evaluasi-kevin-rahmat-usai-tersingkir-di-korea-masters-2023
+https://sport.detik.com/raket/d-7027706/korea-masters-2023-kevin-rahmat-tersingkir-usai-tarung-3-gim
+https://sport.detik.com/sport-lain/d-7026933/btn-jakarta-run-2023-bakal-digelar-12-november-total-hadiah-rp-2-5-m
+https://sport.detik.com/sport-lain/d-7026901/radja-nainggolan-bangga-danau-toba-gelar-kejuaraan-dunia-aquabike-jetski
+https://sport.detik.com/moto-gp/d-7026364/misi-tersembunyi-fabio-quartararo-di-motogp-malaysia-2023
+https://sport.detik.com/moto-gp/d-7026144/pecco-bagnaia-kalem-meski-jorge-martin-makin-dekat
+https://sport.detik.com/moto-gp/d-7025808/jadwal-motogp-malaysia-2023-akhir-pekan-ini
+https://sport.detik.com/sport-lain/d-7025659/hampir-20-ribu-peserta-siap-meriahkan-pertamina-eco-runfest-2023
+https://sport.detik.com/sport-lain/d-7025283/bamsoet-dukung-event-drag-race-harley-davidson-di-pik-2
+https://sport.detik.com/detiksport/d-7024965/liga-champions-pepe-cetak-gol-spesial-di-hari-ultah-ibu
+https://sport.detik.com/basket/d-7024592/sudah-5-tahun-beavers-ingin-terus-lahirkan-pebasket-berbakat
+https://sport.detik.com/sport-lain/d-7024561/panjat-tebing-ri-berebut-tiket-olimpiade-di-ifsc-asia-qualifier-2023
+https://sport.detik.com/raket/d-7024355/ungkapan-kevin-rahmat-soal-debut-di-korea-masters-2023
+https://sport.detik.com/moto-gp/d-7024091/bagnaia-sebut-bukan-kegagalan-andai-tak-juara-di-motogp-2023
+https://sport.detik.com/sport-lain/d-7023764/bamsoet-puji-prestasi-sean-gelael-runner-up-di-8-hours-of-bahrain
+https://sport.detik.com/sport-lain/d-7023752/pelari-dari-21-negara-bakal-ikut-meriahkan-btn-jakarta-run-2023
+https://sport.detik.com/raket/d-7023595/korea-masters-2023-kevin-rahmat-lolos-ke-16-besar
+https://sport.detik.com/basket/d-7022755/tiket-laris-animo-final-dbl-jakarta-series-tinggi
+https://sport.detik.com/sport-lain/d-7022734/kejuaraan-atletik-pelajar-jakarta-banten-ukir-rekor-baru
+https://sport.detik.com/raket/d-7022283/daftar-wakil-indonesia-di-korea-masters-2023-kevin-rahmat-siap-debut
+https://sport.detik.com/moto-gp/d-7022129/target-marc-marquez-di-2024-bukan-samai-rekor-gelar-rossi-melainkan
+https://sport.detik.com/sport-lain/d-7021659/megawati-hangestri-bidik-titel-juara-bersama-red-sparks
+https://sport.detik.com/raket/d-7020772/gagal-pecah-telur-rehan-lisa-kecewa-berat
+https://sport.detik.com/raket/d-7020781/hylo-open-2023-cedera-paksa-apriyani-fadia-mundur-di-final
+https://sport.detik.com/sport-lain/d-7020765/wec-2023-sean-dan-wrt-31-runner-up-di-bahrain
+https://sport.detik.com/sport-lain/d-7020729/bertemu-menlu-bamsoet-dorong-tarung-derajat-masuk-cabor-sea-games-2025
+https://sport.detik.com/raket/d-7020680/final-hylo-open-2023-rehan-lisa-jadi-runner-up
+https://sport.detik.com/raket/d-7020527/ambisi-anthony-ginting-kejar-emas-olimpiade
+https://sport.detik.com/raket/d-7020244/jelang-final-hylo-open-2023-kans-revans-rehan-lisa
+https://sport.detik.com/sport-lain/d-7020050/taekwondoin-indonesia-ni-kadek-heni-raih-emas-di-kejuaraan-asia-2023
+https://sport.detik.com/sport-lain/d-7019778/astra-xtramiles-half-marathon-dukung-gaya-hidup-sehat-dan-jaga-lingkungan
+https://sport.detik.com/raket/d-7019581/jadwal-hylo-open-2023-rehan-lisa-apri-fadia-kejar-titel-juara
+https://sport.detik.com/f1/d-7019740/hasil-sprint-race-f1-gp-brasil-2023-verstappen-ungguli-norris
+https://sport.detik.com/raket/d-7019562/hylo-open-2023-apri-fadia-menang-mudah-tembus-final
+https://sport.detik.com/sport-lain/d-7019559/kongres-tafisa-2023-menpora-paparkan-cara-atasi-iklim-lewat-olahraga
+https://sport.detik.com/raket/d-7019501/hylo-open-2023-rehan-lisa-melaju-ke-final
+https://sport.detik.com/sport-lain/d-7019471/animo-kejuaraan-atletik-pelajar-di-jakarta-banten-meningkat
+https://sport.detik.com/moto-gp/d-7018918/honda-dikabarkan-jalin-kontak-dengan-di-giannantonio
+https://sport.detik.com/sport-lain/d-7018887/resmi-jeka-saragih-hadapi-lucas-alexander-di-ufc
+https://sport.detik.com/f1/d-7018573/kualifikasi-f1-gp-brasil-2023-verstappen-rebut-pole-position
+https://sport.detik.com/sport-lain/d-7018447/menpora-hadiri-tafisa-world-congress-2023-di-jerman
+https://sport.detik.com/sport-lain/d-7018366/wec-2023-wrt-31-start-ketiga-di-8-hours-of-bahrain
+https://sport.detik.com/raket/d-7018326/hasil-hylo-open-2023-apri-fadia-melaju-mulus-ke-semifinal
+https://sport.detik.com/raket/d-7018241/hasil-hylo-open-2023-dejan-gloria-terhenti-di-perempatfinal
+https://sport.detik.com/raket/d-7018216/rehan-lisa-ke-semifinal-hylo-open-2023
+https://sport.detik.com/raket/d-7017995/ons-jabeur-rela-sumbang-miliaran-rupiah-demi-palestina
+https://sport.detik.com/moto-gp/d-7017820/bos-vr46-racing-team-tak-duga-marc-marquez-akan-ke-ducati
+https://sport.detik.com/basket/d-7017340/hasil-nba-wembanyama-gemilang-spurs-kembali-tekuk-suns
+https://sport.detik.com/sport-lain/d-7017190/wec-2023-hujan-warnai-simulasi-lomba-wrt-31-di-bahrain
+https://sport.detik.com/sport-lain/d-7017037/kampanyekan-gaya-hidup-sehat-gun2-bike-rutin-gelar-event-sepeda-dan-lari
+https://sport.detik.com/raket/d-7016594/hylo-open-2023-febriana-amalia-kandas-di-16-besar
+https://sport.detik.com/raket/d-7016547/hylo-open-2023-apriyani-fadia-melenggang-ke-perempatfinal
+https://sport.detik.com/sport-lain/d-7016143/bonus-asian-games-belum-cair-karena-usulannya-gabung-asian-para-games
+https://sport.detik.com/sport-lain/d-7016414/local-legend-hadirkan-sensasi-balapan-sepeda-lewati-3-gunung
+https://sport.detik.com/moto-gp/d-7016019/joan-mir-pahami-keputusan-marquez-juga-sempat-ingin-tinggalkan-honda
+https://sport.detik.com/raket/d-7016149/hylo-open-2023-rehan-lisa-melaju-ke-babak-8-besar
+https://sport.detik.com/raket/d-7016070/hylo-open-2023-dejan-gloria-tarung-3-gim-lolos-ke-perempatfinal
+https://sport.detik.com/sport-lain/d-7015712/bonus-asian-games-dan-asian-para-games-diusulkan-naik-5-persen
+https://sport.detik.com/raket/d-7015219/pasangan-marcus-gideon-rayhan-debut-di-india-akhir-tahun-ini
+https://sport.detik.com/raket/d-7015042/jadwal-hylo-open-2023-empat-wakil-merah-putih-berebut-tiket-8-besar
+https://sport.detik.com/sport-lain/d-7014728/indonesia-berencana-jadi-tuan-rumah-seri-kejuaraan-dunia-jetski-2024
+https://sport.detik.com/sport-lain/d-7014653/wec-2023-sean-dan-wrt-31-ingin-tutup-musim-dengan-manis
+https://sport.detik.com/sport-lain/d-7014387/debut-imag-sukses-koni-pusat-tahun-depan-lebih-menarik
+https://sport.detik.com/raket/d-7014618/hasil-hylo-open-2023-rehan-lisa-singkirkan-wakil-denmark
+https://sport.detik.com/raket/d-7014553/pelatih-ungkap-kesiapan-kevin-rahmat-jelang-korea-masters-2023
+https://sport.detik.com/sport-lain/d-7014377/gaji-pevoli-indonesia-megawati-tembus-rp-1-57-m-per-tahun
+https://sport.detik.com/raket/d-7014480/hasil-hylo-open-2023-praveen-melati-tumbang
+https://sport.detik.com/sport-lain/d-7014264/megawati-hangestri-si-pevoli-viral-indonesia-ingin-menginspirasi
+https://sport.detik.com/moto-gp/d-7013774/motogp-alex-marquez-tak-sabar-lihat-abangnya-naik-motor-ducati
+https://sport.detik.com/raket/d-7014198/hasil-hylo-open-2023-dejan-gloria-lewati-rintangan-pertama
+https://sport.detik.com/sport-lain/d-7013408/saat-duta-sheila-on-7-main-voli-untuk-rayakan-sumpah-pemuda
+https://sport.detik.com/raket/d-7013270/lama-tertunda-kevin-rahmat-debut-pekan-depan-di-korea-masters-2023
+https://sport.detik.com/raket/d-7013229/jadwal-hylo-open-2023-tiga-wakil-ri-hadapi-pebulutangkis-eropa
+https://sport.detik.com/moto-gp/d-7013126/marc-marquez-free-agent-di-2025-ducati-tertarik
+https://sport.detik.com/raket/d-7012758/hylo-open-2023-apriyani-fadia-dan-febriana-amalia-ke-babak-kedua
+https://sport.detik.com/sport-lain/d-7012732/rihan-variza-juara-sprint-rally-2023-pede-tatap-aprc-akhir-november
+https://sport.detik.com/sport-lain/d-7012228/kata-menpora-dito-soal-bonus-atlet-asian-games-dan-asian-para-games
+https://sport.detik.com/sport-lain/d-7012382/tips-persiapan-marathon-10k-ala-bambang-pamungkas-penuhi-mineral
+https://sport.detik.com/raket/d-7012047/update-peringkat-race-to-final-2023-fajar-rian-kukuh-di-puncak
+https://sport.detik.com/moto-gp/d-7011777/jorge-martin-promosi-ke-ducati-di-2024
+https://sport.detik.com/raket/d-7011670/ranking-bwf-jonatan-christie-sukses-naik-dua-peringkat
+https://sport.detik.com/basket/d-7011488/perbasi-gandeng-lithuania-tingkatkan-level-timnas
+https://sport.detik.com/sport-lain/d-7010999/supermoto-race-2023-seru-di-dalam-dan-luar-lintasan
+https://sport.detik.com/moto-gp/d-7010795/dani-pedrosa-komentari-aksi-dominan-jorge-martin-di-thailand
+https://sport.detik.com/sport-lain/d-7010738/taekwondo-indonesia-segera-tentukan-atlet-ke-kualifikasi-olimpiade
+https://sport.detik.com/moto-gp/d-7010323/motogp-thailand-penyesalan-mendalam-alex-marquez
+https://sport.detik.com/moto-gp/d-7009942/motogp-2023-bagnaia-dan-jorge-martin-sama-sama-tertekan
+https://sport.detik.com/raket/d-7009718/harapan-pelatih-untuk-jonatan-christie-usai-juara-french-open
+https://sport.detik.com/moto-gp/d-7009511/jorge-martin-healing-dulu-mau-santai-di-bali
+https://sport.detik.com/raket/d-7009505/tren-positif-bulutangkis-ri-pada-akhir-pekan-juara-di-2-ajang-berbeda
+https://sport.detik.com/raket/d-7009302/jonatan-christie-juara-french-open-2023-ini-target-target-berikutnya
+https://sport.detik.com/raket/d-7009227/finis-runner-up-di-french-open-bagas-fikri-ingin-lebih-konsisten
+https://sport.detik.com/basket/d-7009069/final-dbl-jakarta-series-bergulir-di-indonesia-arena
+https://sport.detik.com/moto-gp/d-7008751/motogp-thailand-yang-sukses-buat-marc-marquez
+https://sport.detik.com/f1/d-7008770/hasil-f1-gp-meksiko-2023-verstappen-pecahkan-rekor-kemenangan-semusim
+https://sport.detik.com/raket/d-7008733/french-open-2023-china-rebut-3-gelar-jonatan-juara
+https://sport.detik.com/sport-lain/d-7008685/victoria-run-2023-lari-yuk-biar-lebih-sehat
+https://sport.detik.com/raket/d-7008729/dudung-abdurachman-siap-maju-caketum-pbsi
+https://sport.detik.com/sport-lain/d-7008719/farudilla-adam-juara-umum-di-sisr-seri-kejurnas-2023
+https://sport.detik.com/sport-lain/d-7008673/bpkh-hajj-run-fun-walk-2023-selesai-ada-500-peserta
+https://sport.detik.com/moto-gp/d-7008590/motogp-thailand-2023-brad-binder-kena-sanksi-turun-satu-tingkat
+https://sport.detik.com/g-sport/d-7008473/di-hsp-menpora-ingatkan-pentingnya-gotong-royong-dan-tolong-menolong
+https://sport.detik.com/moto-gp/d-7008308/motogp-thailand-yang-terindah-di-hidup-jorge-martin
+https://sport.detik.com/sport-lain/d-7008402/pb-ti-cari-talenta-taekwondo-di-babak-kualifikasi-pon-2024
+https://sport.detik.com/moto-gp/d-7008226/klasemen-motogp-2023-jorge-martin-pangkas-jarak-dari-bagnaia
+https://sport.detik.com/sport-lain/d-7008351/kejuaraan-atletik-pelajar-di-kupang-tuntas
+https://sport.detik.com/moto-gp/d-7008182/motogp-thailand-2023-jorge-martin-asapi-binder-dan-bagnaia
+https://sport.detik.com/sport-lain/d-7008175/megawati-tampil-apik-red-sparks-kalahkan-hyundai-hillstate-3-0
+https://sport.detik.com/moto-gp/d-7008168/hasil-motogp-thailand-2023-jorge-martin-menangi-balapan-seru
+https://sport.detik.com/raket/d-7007935/bagas-fikri-ke-final-lagi-bisakah-kali-ini-juara
+https://sport.detik.com/sport-lain/d-7007761/dibuat-knockdown-francis-ngannou-ini-kata-tyson-fury
+https://sport.detik.com/moto-gp/d-7007655/tatap-race-motogp-thailand-alex-marquez-sudah-lebih-bugar
+https://sport.detik.com/moto-gp/d-7007630/link-live-streaming-motogp-thailand-2023-tayang-di-trans7
+https://sport.detik.com/sport-lain/d-7007738/mal-artha-gading-ajak-keluarga-seru-seruan-lari-sehat-di-kiko-run
+https://sport.detik.com/moto-gp/d-7007627/starting-grid-motogp-thailand-2023-jorge-martin-pole-position
+https://sport.detik.com/raket/d-7007600/jadwal-final-french-open-2023-jonatan-bagas-fikri-berburu-gelar
+https://sport.detik.com/moto-gp/d-7007583/jadwal-motogp-thailand-2023-sore-ini
+https://sport.detik.com/sport-lain/d-7007565/sempat-dibuat-jatuh-tyson-fury-menang-angka-atas-francis-ngannou
+https://sport.detik.com/f1/d-7007557/charles-leclerc-rebut-pole-f1-gp-meksiko-2023
+https://sport.detik.com/raket/d-7007518/hasil-french-open-2023-jonatan-lolos-ke-final
+https://sport.detik.com/raket/d-7007427/hasil-french-open-2023-bagas-fikri-tembus-final
+https://sport.detik.com/sport-lain/d-7007361/sah-awal-chairuddin-ketum-pp-pesti-2023-2028
+https://sport.detik.com/raket/d-7007297/hasil-french-open-2023-apri-fadia-kalah-di-semifinal-usai-duel-sengit
+https://sport.detik.com/sport-lain/d-7007177/asian-para-games-2023-di-hangzhou-resmi-berakhir
+https://sport.detik.com/sport-lain/d-7007078/asian-para-games-tuntas-kemenpora-segera-usulkan-bonus-ke-presiden
+https://sport.detik.com/sport-lain/d-7007027/asian-para-games-2023-china-juara-umum-indonesia-peringkat-keenam
+https://sport.detik.com/moto-gp/d-7006831/klasemen-motogp-2023-jorge-martin-dekati-pecco-bagnaia
+https://sport.detik.com/moto-gp/d-7006790/sprint-race-motogp-thailand-2023-martin-juara
+https://sport.detik.com/moto-gp/d-7006773/hasil-sprint-race-motogp-thailand-2023-martin-menang-bagnaia-ketujuh
+https://sport.detik.com/sport-lain/d-7006558/ukir-sejarah-di-asian-para-games-balap-sepeda-pede-tatap-paris
+https://sport.detik.com/sport-lain/d-7006511/tyson-fury-vs-francis-ngannou-duel-raja-kelas-berat-tinju-vs-ufc
+https://sport.detik.com/sport-lain/d-7006516/atlet-ri-peraih-medali-asian-para-games-dapat-rumah-sesuai-domisili
+https://sport.detik.com/sport-lain/d-7006552/catur-tambah-3-emas-indonesia-di-hari-penutupan-asian-para-games-2023
+https://sport.detik.com/moto-gp/d-7006447/hasil-kualifikasi-motogp-thailand-pecahkan-rekor-martin-pole-position
+https://sport.detik.com/moto-gp/d-7006383/hasil-fp2-motogp-thailand-2023-vinales-tercepat
+https://sport.detik.com/raket/d-7006264/jadwal-french-open-2023-3-wakil-indonesia-main-di-semifinal
+https://sport.detik.com/moto-gp/d-7006286/jadwal-motogp-thailand-2023-hari-ini-kualifikasi-dan-sprint-race
+https://sport.detik.com/sport-lain/d-7006248/dua-lawan-mundur-jeka-saragih-masih-cari-lawan-di-ufc
+https://sport.detik.com/moto-gp/d-7006116/harapan-untuk-motogp-mandalika-tahun-depan
+https://sport.detik.com/raket/d-7006094/french-open-2023-lewati-naraoka-jonatan-ke-semifinal
+https://sport.detik.com/raket/d-7006082/french-open-2023-fajar-rian-tumbang-di-tangan-wakil-denmark
+https://sport.detik.com/raket/d-7006041/french-open-2023-ahsan-hendra-terhenti-di-perempatfinal
+https://sport.detik.com/sport-lain/d-7005954/menpora-dito-jadi-ketua-panitia-aquabike-dan-formula-1-powerboat
+https://sport.detik.com/raket/d-7005853/hasil-french-open-2023-bagas-fikri-ke-semifinal
+https://sport.detik.com/raket/d-7005730/hasil-french-open-2023-anthony-ginting-disingkirkan-li-shi-feng
+https://sport.detik.com/raket/d-7005501/hasil-french-open-2023-apri-fadia-ke-semifinal
+https://sport.detik.com/moto-gp/d-7005308/hasil-practice-motogp-thailand-2023-jorge-martin-tercepat
+https://sport.detik.com/sport-lain/d-7005554/kota-kupang-gelar-kejuaraan-atletik-pelajar
+https://sport.detik.com/basket/d-7004874/mengenal-bounce-pass-dalam-permainan-bola-basket-dan-cara-melakukannya
+https://sport.detik.com/moto-gp/d-7004663/hasil-free-practice-i-motogp-thailand-jorge-martin-tercepat
+https://sport.detik.com/raket/d-7004288/jadwal-french-open-2023-hari-ini-7-wakil-indonesia-main-di-8-besar
+https://sport.detik.com/raket/d-7004191/french-open-2023-leo-daniel-kandas-di-babak-kedua
+https://sport.detik.com/sport-lain/d-7004172/rajai-imag-2023-tim-kickboxing-dki-bertekad-taklukkan-pon-2024
+https://sport.detik.com/raket/d-7004185/french-open-2023-jonatan-menangi-duel-3-gim-lolos-ke-8-besar
+https://sport.detik.com/raket/d-7004181/french-open-2023-bagas-fikri-lolos-ke-perempatfinal
+https://sport.detik.com/sport-lain/d-7004167/kalender-wsbk-2024-dirilis-mandalika-absen
+https://sport.detik.com/sport-lain/d-7003956/puluhan-pembalap-motocross-bakal-tarung-habis-habisan-di-malang
+https://sport.detik.com/raket/d-7004168/french-open-2023-ahsan-hendra-singkirkan-ganda-nomor-1-dunia
+https://sport.detik.com/raket/d-7004137/french-open-2023-rehan-lisa-ke-perempatfinal-dejan-gloria-kalah
+https://sport.detik.com/raket/d-7004113/bulutangkis-sumbang-emas-indonesia-capai-target-asian-para-games
+https://sport.detik.com/basket/d-7004040/borneo-basketball-usung-target-juara-di-ibl-2024
+https://sport.detik.com/basket/d-7004034/jelang-ibl-2024-pemain-asing-mulai-didaftarkan-1-november
+https://sport.detik.com/raket/d-7004023/french-open-2023-ginting-melangkah-ke-perempatfinal
+https://sport.detik.com/sport-lain/d-7004013/pentingnya-mineral-bagi-pelari-saat-cuaca-panas
+https://sport.detik.com/sport-lain/d-7004094/tim-kickboxing-dki-jakarta-perlu-tc-di-belanda
+https://sport.detik.com/raket/d-7003832/french-open-2023-putri-kw-takluk-dari-carolina-marin-di-16-besar
+https://sport.detik.com/raket/d-7003726/french-open-2023-fajar-rian-dan-apri-fadia-melaju-ke-delapan-besar
+https://sport.detik.com/g-sport/d-7003861/kevin-sanjaya-dapat-penghargaan-dari-psmti
+https://sport.detik.com/sport-lain/d-7003498/asian-para-games-2023-catur-raih-7-emas-ri-kini-punya-17-emas
+https://sport.detik.com/moto-gp/d-7003129/motogp-thailand-marquez-seru-seruan-naik-skutik-bawa-ratusan-keranjang
+https://sport.detik.com/sport-lain/d-7002953/saptoyogo-puas-dengan-catatan-gemilangnya-di-asian-para-games
+https://sport.detik.com/sport-lain/d-7002908/menakar-bonus-sprinter-saptoyogo-usai-gondol-3-emas-asian-para-games
+https://sport.detik.com/sport-lain/d-7002733/asian-para-games-balap-sepeda-kembali-sumbang-emas-kini-dari-m-fadli
+https://sport.detik.com/sport-lain/d-7002464/asian-para-games-2023-indonesia-9-emas-saptoyogo-sudah-sumbang-3
+https://sport.detik.com/raket/d-7002386/jadwal-french-open-2023-hari-ini-11-wakil-indonesia-turun-di-16-besar
+https://sport.detik.com/sport-lain/d-7002317/lawan-jeka-saragih-di-ufc-mundur-akibat-cedera
+https://sport.detik.com/sport-lain/d-7002273/duet-hendra-ichsan-podium-1-di-msf-sprint-race
+https://sport.detik.com/sport-lain/d-7002223/ujian-untuk-muay-thai-dki-jelang-pon-2024
+https://sport.detik.com/raket/d-7002125/french-open-2023-rinov-pitha-kandas-di-babak-pertama
+https://sport.detik.com/raket/d-7001868/french-open-2023-pram-yere-terhenti-di-babak-pertama
+https://sport.detik.com/sport-lain/d-7001842/asian-para-games-2023-boccia-persembahkan-emas-ketujuh-bagi-indonesia
+https://sport.detik.com/raket/d-7001772/french-open-2023-fikri-bagas-praveen-melati-maju-ke-babak-kedua
+https://sport.detik.com/raket/d-7001557/french-open-2023-main-3-gim-ginting-lolos-ke-16-besar
+https://sport.detik.com/sport-lain/d-7001517/klasemen-asian-para-games-2023-indonesia-naik-ke-peringkat-delapan
+https://sport.detik.com/sport-lain/d-7001419/asian-para-games-lawn-bowls-buat-kejutan-raih-emas-keenam-indonesia
+https://sport.detik.com/sport-lain/d-7001376/emas-asian-para-games-sudah-kini-roma-siska-bidik-paralimpiade-2023
+https://sport.detik.com/raket/d-7001252/french-open-2023-lawan-mundur-leo-daniel-ke-babak-16-besar
+https://sport.detik.com/sport-lain/d-7001088/water-station-jakarta-marathon-penuhi-standar-global
+https://sport.detik.com/basket/d-7000943/hasil-nba-suns-menang-dramatis-di-markas-warriors
+https://sport.detik.com/sport-lain/d-7000934/asian-para-games-2023-emas-indonesia-bertambah-kini-persembahan-judo
+https://sport.detik.com/sport-lain/d-7000841/keyakinan-wulan-mahda-berbuah-medali-perunggu-panahan-asian-para-games
+https://sport.detik.com/sport-lain/d-7000812/asian-para-games-2023-saptoyogo-kembali-sumbang-emas-bagi-indonesia
+https://sport.detik.com/raket/d-7000642/ranking-bwf-fajar-rian-turun-peringkat-lagi
+https://sport.detik.com/sport-lain/d-7000552/4-rekomendasi-acara-streaming-vidio-buat-para-pecinta-olahraga
+https://sport.detik.com/basket/d-7000518/nba-2023-24-dimulai-nuggets-bungkam-lakers-119-107
+https://sport.detik.com/moto-gp/d-7000286/bagnaia-juara-atau-tidak-jorge-martin-tetap-pahlawan
+https://sport.detik.com/sport-lain/d-7000110/dan-tangis-alexander-volkanovski-tak-terbendung-lagi
+https://sport.detik.com/raket/d-7000212/french-open-2023-dejan-gloria-melaju-ke-babak-kedua
+https://sport.detik.com/raket/d-7000189/gregoria-langsung-keok-di-babak-pertama-french-open-2023
+https://sport.detik.com/sport-lain/d-7000097/lomba-lari-ini-ajak-peserta-olahraga-sambil-menabung-untuk-haji
+https://sport.detik.com/raket/d-7000107/meski-menang-apri-fadia-sayangkan-perang-saudara-di-babak-awal
+https://sport.detik.com/raket/d-7000065/french-open-2023-jonatan-taklukkan-nishimoto
+https://sport.detik.com/sport-lain/d-6999722/islam-makhachev-mau-lebihi-khabib-nurmagomedov
+https://sport.detik.com/raket/d-6999850/french-open-2023-fajri-dan-the-daddies-ke-16-besar-keluhkan-lampu
+https://sport.detik.com/sport-lain/d-6999632/asian-games-2023-widiasih-raih-perak-penasaran-sama
+https://sport.detik.com/sport-lain/d-6999510/seri-pamungkas-balapan-supermoto-digelar-di-kemayoran-akhir-pekan-ini
+https://sport.detik.com/sport-lain/d-6999159/menpora-dito-target-di-asian-para-games-2023-belum-ada-yang-meleset
+https://sport.detik.com/sport-lain/d-6999043/arianti-putri-emas-asian-para-games-jadi-motivasi-di-paralimpiade
+https://sport.detik.com/sport-lain/d-6998981/arianti-putri-ditarget-perunggu-malah-raih-emas-asian-para-games
+https://sport.detik.com/sport-lain/d-6998811/asian-para-games-2023-para-atletik-indonesia-kembali-raih-emas
+https://sport.detik.com/sport-lain/d-6999009/kota-masohi-bangga-ditunjuk-kemenpora-gelar-kejuaraan-tarkam
+https://sport.detik.com/moto-gp/d-6998471/honda-lagi-remuk-redam-dibela-casey-stoner
+https://sport.detik.com/sport-lain/d-6998493/kemenpora-galar-kejuaraan-tarkam-di-kabupaten-tebo
+https://sport.detik.com/sport-lain/d-6998441/dypo-fitra-kunci-juara-umum-di-putaran-kelima-issom-2023
+https://sport.detik.com/sport-lain/d-6998410/misi-pb-porlasi-bangkitkan-olahraga-layar-indonesia
+https://sport.detik.com/sport-lain/d-6998404/issom-2023-alvin-bahar-menangi-putaran-kelima-avila-masih-di-puncak
+https://sport.detik.com/sport-lain/d-6998184/jeka-saragih-vs-jesse-butler-di-ufc-si-tendangan-maut-pelajari-ini
+https://sport.detik.com/sport-lain/d-6998228/daftar-juara-piala-presiden-esports-2023
+https://sport.detik.com/sport-lain/d-6998182/jeka-saragih-ke-ufc-berharap-yang-lain-menyusul
+https://sport.detik.com/raket/d-6998274/daftar-pemain-indonesia-di-french-open-2023-apri-fadia-masuk-skuad
+https://sport.detik.com/sport-lain/d-6998269/mansion-sports-entertainment-group-makin-eksis-di-bidang-sportaiment
+https://sport.detik.com/sport-lain/d-6998255/asian-para-games-2023-indonesia-rebut-emas-dari-renang-pecahkan-rekor
+https://sport.detik.com/moto-gp/d-6997959/motogp-2023-ditekan-jorge-martin-bagnaia-punya-pengalaman-sip
+https://sport.detik.com/raket/d-6997960/pelatih-sebut-bagas-fikri-sudah-cukup-baik-tapi
+https://sport.detik.com/sport-lain/d-6997750/asian-para-games-2023-atlet-tolak-peluru-ri-bersyukur-walau-rebut-perak
+https://sport.detik.com/sport-lain/d-6997785/klasemen-asian-para-games-2023-indonesia-kini-di-peringkat-9
+https://sport.detik.com/moto-gp/d-6997722/marc-marquez-jorge-martin-masih-favorit-juara-motogp-2023
+https://sport.detik.com/sport-lain/d-6997615/profil-saptoyogo-atlet-penyumbang-emas-pertama-indonesia
+https://sport.detik.com/sport-lain/d-6997545/jeka-saragih-on-fire-menatap-debut-di-ufc
+https://sport.detik.com/sport-lain/d-6997534/asian-para-games-2023-emas-pertama-indonesia-dari-saptoyogo
+https://sport.detik.com/sport-lain/d-6997440/balap-sepeda-sumbang-2-medali-asian-para-games-2023
+https://sport.detik.com/raket/d-6997377/bagas-fikri-kecewa-dengan-penampilan-di-final-denmark-open-2023
+https://sport.detik.com/sport-lain/d-6997218/ricky-harun-zaskia-sungkar-akui-kesegaran-le-minerale
+https://sport.detik.com/sport-lain/d-6997194/pb-pasi-puji-hydration-partner-jakarta-marathon-2023
+https://sport.detik.com/moto-gp/d-6997116/jadwal-motogp-thailand-akhir-pekan-ini
+https://sport.detik.com/sport-lain/d-6997108/target-emas-meleset-pelatih-tolak-peluru-akui-jepang-di-luar-prediksi
+https://sport.detik.com/sport-lain/d-6997013/siapa-bisa-bendung-khamzat-chimaev
+https://sport.detik.com/sport-lain/d-6996928/indonesia-rebut-medali-pertama-di-asian-para-games-2023
+https://sport.detik.com/f1/d-6996714/hamilton-dan-leclerc-didiskualifikasi-dari-f1-gp-as-2023
+https://sport.detik.com/raket/d-6996668/rekap-denmark-open-2023-indonesia-tanpa-gelar
+https://sport.detik.com/f1/d-6996620/hasil-f1-gp-as-2023-verstappen-menang-lagi
+https://sport.detik.com/raket/d-6996455/hasil-denmark-open-2023-bagas-fikri-kalah-di-final
+https://sport.detik.com/sport-lain/d-6996418/asian-para-games-2023-resmi-dibuka
+https://sport.detik.com/sport-lain/d-6996351/pengertian-sparing-dan-manfaatnya-termasuk-mengukur-kemampuan-atlet
+https://sport.detik.com/sport-lain/d-6996151/khabib-jelaskan-ketidakhadirannya-di-sudutnya-islam
+https://sport.detik.com/sport-lain/d-6996129/kontingen-lawn-bowls-indonesia-waspadai-pesaing-baru-asian-para-games
+https://sport.detik.com/raket/d-6995977/head-to-head-bagas-fikri-vs-aaron-soh-jelang-final-denmark-open-2023
+https://sport.detik.com/sport-lain/d-6995863/head-kick-yang-tak-diduga-duga-dari-islam-makhachev
+https://sport.detik.com/moto-gp/d-6995858/motogp-australia-bagnaia-akan-kesulitan-kalau-sprint-race-tetap-lanjut
+https://sport.detik.com/sport-lain/d-6995855/indonesia-turunkan-32-orang-pada-defile-asian-para-games-2023
+https://sport.detik.com/moto-gp/d-6995786/motogp-mau-pisah-dengan-gresini-diggia-malah-sedang-bagus-bagusnya
+https://sport.detik.com/raket/d-6995736/bagas-fikri-jelang-final-denmark-open-mau-maksimal-demi-juara
+https://sport.detik.com/sport-lain/d-6995702/selebrasi-diam-islam-makhachev-untuk-palestina
+https://sport.detik.com/sport-lain/d-6995665/riadi-saputra-jadi-pembawa-bendera-indonesia-di-opening-asian-para-games-2023
+https://sport.detik.com/moto-gp/d-6995604/sprint-race-motogp-australia-2023-batal-padahal-marc-marquez
+https://sport.detik.com/raket/d-6995565/jadwal-final-denmark-open-2023-fikri-bagas-berburu-gelar-juara
+https://sport.detik.com/sport-lain/d-6995433/hasil-ufc-294-makhachev-bikin-ko-volkanovski-chimaev-atasi-usman
+https://sport.detik.com/moto-gp/d-6995418/cuaca-buruk-sprint-race-motogp-australia-2023-dibatalkan
+https://sport.detik.com/moto-gp/d-6995364/link-live-streaming-sprint-race-motogp-australia-pagi-ini-ada-di-trans7
+https://sport.detik.com/moto-gp/d-6995356/jadwal-sprint-race-motogp-australia-2023-start-minggu-pagi
+https://sport.detik.com/f1/d-6995296/hasil-sprint-race-f1-gp-as-2023-verstappen-pemenangnya
+https://sport.detik.com/moto-gp/d-6995170/motogp-australia-2023-bagnaia-puas-tapi-tidak-untuk-bastianini
+https://sport.detik.com/sport-lain/d-6995181/armand-jadi-ketua-umum-triathlon-indonesia
+https://sport.detik.com/raket/d-6995127/denmark-open-2023-fikri-bagas-ke-final-usai-tekuk-fajar-rian
+https://sport.detik.com/moto-gp/d-6995020/jorge-martin-buang-peluang-juara-karena-pakai-ban-lunak-alasannya
+https://sport.detik.com/moto-gp/d-6994830/marc-marquez-terkejut-lihat-pilihan-ban-jorge-martin
+https://sport.detik.com/sport-lain/d-6994948/le-minerale-jadi-mitra-hidrasi-jakarta-marathon-2023
+https://sport.detik.com/moto-gp/d-6994744/zarco-rasakan-dukungan-semesta-usai-juara-motogp-australia-2023
+https://sport.detik.com/sport-lain/d-6995029/main-event-piala-presiden-esports-2023-resmi-digelar
+https://sport.detik.com/moto-gp/d-6994736/bagnaia-tak-kaget-jorge-martin-gagal-juara-di-australia
+https://sport.detik.com/moto-gp/d-6994653/hasil-motogp-australia-2023-dalam-angka-usai-johann-zarco-berjaya
+https://sport.detik.com/moto-gp/d-6994625/setelah-120-balapan-zarco-raih-kemenangan-pertama-di-motogp
+https://sport.detik.com/moto-gp/d-6994596/jorge-martin-kecolongan-di-lap-terakhir-padahal-sebelumnya-gacor
+https://sport.detik.com/moto-gp/d-6994404/klasemen-motogp-2023-bagnaia-kini-unggul-27-poin-dari-jorge-martin
+https://sport.detik.com/moto-gp/d-6994342/hasil-motogp-australia-2023-drama-di-lap-terakhir-zarco-juara
+https://sport.detik.com/moto-gp/d-6994332/motogp-australia-2023-sengit-di-akhir-zarco-1-bagnaia-2-martin-5
+https://sport.detik.com/moto-gp/d-6994162/link-live-streaming-motogp-australia-2023-live-di-trans7
+https://sport.detik.com/moto-gp/d-6994120/starting-grid-motogp-australia-2023-siang-ini
+https://sport.detik.com/f1/d-6994042/hasil-kualifikasi-f1-gp-as-2023-leclerc-rebut-pole-position
+https://sport.detik.com/moto-gp/d-6994019/hasil-kualifikasi-motogp-australia-2023-jorge-martin-pole
+https://sport.detik.com/moto-gp/d-6993636/jadwal-motogp-australia-2023-balapan-utama-siang-nanti
+https://sport.detik.com/raket/d-6993954/denmark-open-2023-anthony-ginting-kandas-di-perempatfinal
+https://sport.detik.com/raket/d-6993949/denmark-open-2023-bagas-fikri-susah-payah-ke-semifinal
+https://sport.detik.com/raket/d-6993892/denmark-open-2023-depak-wakil-korsel-fajar-rian-ke-semifinal
+https://sport.detik.com/sport-lain/d-6993883/kejurnas-gymnastics-2023-selesai-dki-jakarta-juara-umum
+https://sport.detik.com/sport-lain/d-6993751/cdm-kontingen-indonesia-di-asian-games-2022-dibubarkan
+https://sport.detik.com/sport-lain/d-6993597/menpora-tanda-tangan-mou-olahraga-dengan-arab-saudi
+https://sport.detik.com/raket/d-6993632/hasil-denmark-open-2023-febriana-amalia-terhenti-di-perempatfinal
+https://sport.detik.com/moto-gp/d-6993345/race-motogp-australia-pindah-sabtu-marc-marquez-hati-hati-pilih-ban
+https://sport.detik.com/moto-gp/d-6993339/optimisme-jorge-martin-di-motogp-australia-2023
+https://sport.detik.com/moto-gp/d-6993319/motogp-australia-2023-berubah-jadwal-capirossi-angin-bisa-70-km-jam
+https://sport.detik.com/moto-gp/d-6993086/motogp-australia-bagnaia-kembali-kesulitan-saat-latihan
+https://sport.detik.com/sport-lain/d-6992667/ufc-294-kamaru-usman-vs-khamzat-chimaev-mcgregor-dukung-siapa
+https://sport.detik.com/moto-gp/d-6992752/jadwal-motogp-australia-2023-berubah-race-utama-di-hari-sabtu
+https://sport.detik.com/moto-gp/d-6992647/hasil-practice-motogp-australia-2023-binder-tercepat-bagnaia-q1
+https://sport.detik.com/raket/d-6992111/denmark-open-2023-ginting-pijak-babak-8-besar
+https://sport.detik.com/raket/d-6992106/denmark-open-2023-fajar-rian-susah-payah-ke-perempatfinal
+https://sport.detik.com/raket/d-6992090/denmark-open-2023-kalahkan-wakil-korsel-bagas-fikri-ke-perempatfinal
+https://sport.detik.com/raket/d-6992067/hasil-denmark-open-2023-febri-tiwi-ke-perempatfinal
+https://sport.detik.com/raket/d-6991945/viktor-axelsen-kecewa-mundur-dari-denmark-open-2023
+https://sport.detik.com/raket/d-6991850/hasil-denmark-open-2023-dejan-gloria-didepak-unggulan-pertama
+https://sport.detik.com/moto-gp/d-6991689/jatuh-di-mandalika-jorge-martin-petik-hikmahnya
+https://sport.detik.com/raket/d-6991756/kekesalan-gregoria-mariska-pada-diri-sendiri
+https://sport.detik.com/raket/d-6991693/hasil-denmark-open-2023-the-daddies-kandas-di-16-besar
+https://sport.detik.com/sport-lain/d-6991568/debut-istimewa-megawati-di-liga-voli-korea
+https://sport.detik.com/raket/d-6991560/denmark-open-2023-gregoria-tersingkir-di-16-besar
+https://sport.detik.com/moto-gp/d-6991419/miguel-oliveira-belum-ada-tawaran-nyata-dari-honda
+https://sport.detik.com/moto-gp/d-6991257/motogp-australia-2023-marc-marquez-enggan-berekspektasi-tinggi
+https://sport.detik.com/sport-lain/d-6991213/bamsoet-buka-kejurnas-tarung-derajat-2023-di-bandung
+https://sport.detik.com/sport-lain/d-6991155/asian-para-games-2023-para-tenis-meja-indonesia-diharap-bikin-kejutan
+https://sport.detik.com/moto-gp/d-6990956/alex-criville-jorge-martin-akan-bangkit-di-motogp-australia
+https://sport.detik.com/sport-lain/d-6990769/eko-yuli-kejar-total-angkatan-310-kg-di-qatar-desember-nanti
+https://sport.detik.com/sport-lain/d-6990768/asian-para-games-atlet-panahan-ri-dikelilingi-bukit-diterjang-angin
+https://sport.detik.com/raket/d-6990128/jadwal-denmark-open-2023-hari-ini-gregoria-vs-sindhu-daddies-vs-chia-soh
+https://sport.detik.com/raket/d-6990046/kalah-lagi-dari-chou-tien-chen-jonatan-saya-mau-bangkit-secepatnya
+https://sport.detik.com/basket/d-6990045/basket-dki-lolos-kualifikasi-pon-2024-di-semua-kategori-putra-dan-putri
+https://sport.detik.com/sport-lain/d-6990044/atlet-jetski-aqsa-aswar-bakal-tanding-tinju-banting-setir
+https://sport.detik.com/sport-lain/d-6990043/nagoya-kembali-gelar-ajang-maraton-perempuan-terbesar-dunia
+https://sport.detik.com/raket/d-6990033/bagas-fikri-pijak-babak-kedua-denmark-open-2023
+https://sport.detik.com/sport-lain/d-6989998/dua-misi-persani-di-kejurnas-gymnastics-2023
+https://sport.detik.com/raket/d-6989968/legenda-bulutangkis-rudy-hartono-dapat-penghargaan-apa-itu
+https://sport.detik.com/raket/d-6989955/denmark-open-2023-dejan-gloria-comeback-lolos-ke-16-besar
+https://sport.detik.com/raket/d-6989911/denmark-open-2023-leo-daniel-juga-langsung-keok-di-babak-pertama
+https://sport.detik.com/raket/d-6989742/denmark-open-2023-disikat-chou-tien-chen-jonatan-langsung-keok
+https://sport.detik.com/raket/d-6989667/tersingkir-di-babak-awal-rinov-mentari-kami-kalah-tenaga
+https://sport.detik.com/raket/d-6989653/denmark-open-2023-fajar-rian-maju-ke-babak-kedua
+https://sport.detik.com/moto-gp/d-6989443/aprilia-maverick-vinales-ada-di-situasi-ideal
+https://sport.detik.com/raket/d-6989421/denmark-open-2023-rinov-pitha-kandas-di-babak-pertama
+https://sport.detik.com/raket/d-6989234/denmark-open-2023-praveen-melati-langsung-out
+https://sport.detik.com/raket/d-6989184/denmark-open-2023-putri-kw-disingkirkan-juara-olimpiade
+https://sport.detik.com/sport-lain/d-6988978/asian-para-games-2023-andalkan-nomor-sprint-atletik-ri-incar-4-emas
+https://sport.detik.com/sport-lain/d-6988933/sprinter-saptoyogo-maksimalkan-latihan-jelang-asian-para-games-2023
+https://sport.detik.com/sport-lain/d-6988901/liga-softball-indonesia-2023-hadir-pekan-ini-diramaikan-atlet-asing
+https://sport.detik.com/sport-lain/d-6988664/boccia-indonesia-genjot-latihan-demi-medali-asian-para-games
+https://sport.detik.com/moto-gp/d-6988583/kritik-aksi-bagnaia-di-mandalika-lorenzo-jangan-bikin-monster-marah
+https://sport.detik.com/sport-lain/d-6988420/renang-indonesia-target-lima-medali-di-asian-para-games-satunya-emas
+https://sport.detik.com/raket/d-6988183/jadwal-denmark-open-2023-hari-ini-jonatan-vs-chou-tien-chen
+https://sport.detik.com/sport-lain/d-6987936/persani-gelar-kejurnas-gymnastics-untuk-kualifikasi-pon-2024
+https://sport.detik.com/sport-lain/d-6987889/triathlon-indonesia-cari-ketum-baru
+https://sport.detik.com/raket/d-6987750/kalahkan-pram-yere-the-daddies-beri-pesan-ini
+https://sport.detik.com/sport-lain/d-6987443/makhachev-vs-volkanovski-momen-balas-dendam-the-great-di-ufc-294
+https://sport.detik.com/raket/d-6987704/denmark-open-2023-febri-tiwi-melangkah-ke-16-besar
+https://sport.detik.com/sport-lain/d-6987435/kamaru-usman-khamzat-chimaev-cepat-kuat-jago-tapi
+https://sport.detik.com/raket/d-6987655/denmark-open-2023-the-daddies-menang-dramatis-atas-pram-yere
+https://sport.detik.com/g-sport/d-6987712/usai-haornas-kemenpora-kembali-kolaborasi-di-hsp-ke-95
+https://sport.detik.com/moto-gp/d-6987342/digantikan-marc-marquez-diggia-legowo-dengan-keputusan-gresini
+https://sport.detik.com/moto-gp/d-6987239/duo-ducati-bikin-comeback-sip-di-motogp-mandalika-2023
+https://sport.detik.com/raket/d-6987234/ketum-pbsi-bertanggung-jawab-atas-kegagalan-di-asian-games-2023
+https://sport.detik.com/raket/d-6987387/denmark-open-2023-gregoria-menang-meyakinkan-atas-okuhara
+https://sport.detik.com/raket/d-6987223/evaluasi-anthony-ginting-usai-lewati-ujian-pertama
+https://sport.detik.com/moto-gp/d-6987162/alasan-di-balik-tangisan-di-giannantonio-di-mandalika
+https://sport.detik.com/sport-lain/d-6987152/intip-fasilitas-kampung-atlet-asian-para-games-2023-di-china
+https://sport.detik.com/basket/d-6987025/pp-perbasi-kirim-timnas-elit-muda-ikuti-kejuaraan-basket-di-china
+https://sport.detik.com/raket/d-6986973/denmark-open-2023-ginting-melaju-mulus-ke-16-besar
+https://sport.detik.com/raket/d-6986919/denmark-open-2023-rehan-lisa-kandas-di-babak-pertama
+https://sport.detik.com/moto-gp/d-6986661/ducati-bagnaia-dan-jorge-martin-tak-ada-yang-diistimewakan
+https://sport.detik.com/sport-lain/d-6986623/7-peraturan-bola-voli-pelanggaran-dan-teknik-dasarnya
+https://sport.detik.com/sport-lain/d-6986416/asian-para-games-2023-kontingen-indonesia-lekas-adaptasi-cuaca-di-hangzhou
+https://sport.detik.com/raket/d-6986491/jadwal-6-wakil-indonesia-di-babak-pertama-denmark-open-2023
+https://sport.detik.com/raket/d-6986410/denmark-open-2023-langsung-duel-the-daddies-vs-pram-yere
+Data Berhasil Di Simpan dengan Jumlah 810
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scraping_detik_news</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://news.detik.com/indeks&#39;</span><span class="p">,</span> <span class="n">num_content</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Food&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://food.detik.com/berita-boga/d-7087667/rayakan-natal-dengan-menara-macaroon-hingga-bbq-seru-di-tengah-kota
+https://food.detik.com/info-kuliner/d-7087998/12-rekomendasi-all-you-can-eat-paling-favorit-worth-it-di-bogor
+https://food.detik.com/info-kuliner/d-7087969/iseng-pria-ini-masak-udang-mentah-di-toilet-pesawat
+https://food.detik.com/info-kuliner/d-7087531/ngakak-pria-ini-pernah-rebutan-bihun-goreng-sama-bunga-citra-lestari
+https://food.detik.com/info-kuliner/d-7087163/5-makanan-viral-sepanjang-tahun-2023-sudah-pernah-cicip
+https://food.detik.com/berita-boga/d-7087119/kisah-jamu-gendong-dari-minuman-kerajaan-hingga-tercatat-di-relief-candi
+https://food.detik.com/tempat-makan/d-7087101/begini-lezatnya-tahu-pong-semarang-favorit-orang-terkaya-di-indonesia
+https://food.detik.com/info-kuliner/d-7086660/5-pesanan-starbucks-yang-tak-disukai-barista-apa-saja
+https://food.detik.com/info-kuliner/d-7085790/gemas-kucing-di-china-ini-hobinya-minta-mie-ke-restoran-setiap-hari
+https://food.detik.com/info-kuliner/d-7085788/agar-tak-boros-lakukan-5-tips-belanja-yang-gampang-ini
+https://food.detik.com/resto-dan-kafe/d-7087244/smara-ada-nasi-konje-crispy-confit-duck-dan-nasi-gandul-di-resto-nyaman-ini
+https://food.detik.com/info-sehat/d-7086657/tak-perlu-cokelat-5-buah-ini-juga-bisa-tingkatkan-mood
+https://food.detik.com/kue/d-7084982/resep-cake-cokelat-lapis-keju-kukus-yang-lembut-legit-untuk-sajian-nata
+https://food.detik.com/ayam/d-7084956/resep-kari-ayam-panang-khas-thailand-yang-berkuah-kental-creamy
+https://food.detik.com/sup-dan-salad/d-7085439/3-resep-sop-daging-berkuah-kaldu-bening-yang-gurih-menyegarkan
+https://food.detik.com/info-kuliner/d-7085784/10-salad-terbaik-di-asean-menurut-tasteatlas-5-dari-indonesia
+https://food.detik.com/info-sehat/d-7085768/mentega-vs-minyak-sayur-mana-yang-lebih-sehat
+https://food.detik.com/info-sehat/d-7085750/5-rebusan-herbal-untuk-asam-lambung-bantu-ringankan-gejalanya
+https://food.detik.com/info-sehat/d-7085756/5-cara-alami-tingkatkan-metabolisme-tubuh-agar-bb-cepat-turun
+https://food.detik.com/info-kuliner/d-7085578/sudah-sewa-restoran-pesta-ultah-wanita-ini-hanya-didatangi-2-orang
+https://food.detik.com/info-kuliner/d-7085638/salah-ketik-angka-pembeli-ini-bayar-rp-8-7-juta-saat-makan-di-kaki-lima
+https://food.detik.com/berita-boga/d-7085752/natal-makin-meriah-dengan-suguhan-kue-klasik-hingga-kekinian
+https://food.detik.com/info-kuliner/d-7085315/ini-perbandingan-biaya-belanja-kevin-home-alone-dengan-harga-sekarang
+https://food.detik.com/info-kuliner/d-7085560/tidak-makan-sayur-dan-daging-ini-pola-diet-geisha-jepang
+https://food.detik.com/info-kuliner/d-7085423/suapi-bocah-di-pesawat-pramugari-ini-viral-dan-curi-perhatian
+https://food.detik.com/info-kuliner/d-7085444/kisah-tukang-bubur-naik-haji-di-dunia-nyata-begini-ceritanya
+https://food.detik.com/info-kuliner/d-7085531/sedang-datang-bulan-wanita-ini-harus-makan-di-lantai
+https://food.detik.com/info-kuliner/d-7085515/youtuber-mukbang-korea-makan-banyak-segini-pengeluarannya-sebulan
+https://food.detik.com/info-kuliner/d-7085362/getok-harga-nasi-campur-rp-60-ribu-penjual-berkelit-salah-paham
+https://food.detik.com/info-kuliner/d-7085425/gegara-salah-terjemahan-restoran-halal-ini-diboikot-dianggap-jual-menu-babi
+https://food.detik.com/info-kuliner/d-7085273/berada-di-area-sepi-muncul-konspirasi-soal-gerai-mcdonalds-ini
+https://food.detik.com/berita-boga/d-7084894/uniknya-sate-kere-jogja-sate-miskin-berbahan-gajih-sapi
+https://food.detik.com/info-kuliner/d-7083865/5-kreasi-cireng-unik-isi-jando-hingga-pakai-bumbu-tahu-gejrot
+https://food.detik.com/info-kuliner/d-7083905/duh-minta-potongan-ayam-selain-dada-pelanggan-ini-dibentak-penjual
+https://food.detik.com/info-kuliner/d-7083800/salut-bocah-12-tahun-jualan-pentol-sampai-malam-demi-biaya-sekolah
+https://food.detik.com/kue/d-7082770/resep-honey-banana-cake-legit-harum-dan-gampang-dibuat
+https://food.detik.com/tahu-dan-tempe/d-7082681/3-resep-tempe-goreng-tepung-yang-kriuk-renyahnya-tahan-lama
+https://food.detik.com/info-kuliner/d-7083773/baru-mcdonalds-buka-cosmcs-gerai-minuman-bergaya-retro
+https://food.detik.com/nasi/d-7082847/resep-nasi-goreng-putih-dan-sayuran-cocok-buat-yang-tak-makan-daging
+https://food.detik.com/info-sehat/d-7083925/10-manfaat-mengonsumsi-jamur-kuping-yang-jarang-diketahui
+https://food.detik.com/info-sehat/d-7083923/5-makanan-untuk-paru-paru-sehat-dan-kuat-bagus-dikonsumsi-rutin
+https://food.detik.com/info-kuliner/d-7083854/baru-jualan-pastry-wanita-ini-sudah-rugi-rp-3-juta-gegara-stand-roboh
+https://food.detik.com/info-kuliner/d-7083831/kocak-ibu-ini-bawakan-kecap-untuk-anaknya-pakai-suntikan
+https://food.detik.com/info-kuliner/d-7083663/cicip-durian-di-malaysia-aktris-china-fan-bingbing-ngaku-jatuh-cinta
+https://food.detik.com/info-kuliner/d-7083757/makan-di-lrt-berasa-piknik-pria-ini-bikin-heboh
+https://food.detik.com/info-kuliner/d-7083649/harga-seblak-lebih-dari-rp-40-ribu-disebut-mahal-berapa-kisarannya
+https://food.detik.com/resto-dan-kafe/d-7083642/nefis-kebab-house-uniknya-iskender-kebab-khas-turki-dengan-butter-rice
+https://food.detik.com/info-kuliner/d-7083697/5-fakta-payakumbuah-milik-arief-muhammad-terbaru-ekspansi-ke-jepang
+https://food.detik.com/info-kuliner/d-7083676/5-restoran-ini-disebut-paling-kontroversial-kenapa-ya
+https://food.detik.com/info-kuliner/d-7083342/parah-pelayan-hina-keluarga-pelanggan-lewat-catatan-bon
+https://food.detik.com/berita-boga/d-7083364/pesona-penjual-es-tebu-di-mojokerto-bikin-dagangannya-laris-manis
+https://food.detik.com/info-kuliner/d-7083256/legendaris-5-snack-hingga-biskuit-ini-usianya-sudah-ratusan-tahun
+https://food.detik.com/info-kuliner/d-7083087/mie-lethek-khas-bantul-disebut-terjelek-sedunia-ini-alasannya
+https://food.detik.com/berita-boga/d-7083079/alakathak-paduan-tempe-benguk-dan-mie-kanji-unik-dari-sukoharjo
+https://food.detik.com/info-kuliner/d-7082439/gemas-reynold-poernomo-masak-bareng-keponakan-ini-menunya
+https://food.detik.com/kue/d-7082274/resep-mini-pie-nastar-almond-renyah-legit-cocok-buat-suguhan-tamu
+https://food.detik.com/berita-boga/d-7082318/aneka-bakso-seafood-rp-6-ribuan-di-transmart-diskon-tiap-hari-20
+https://food.detik.com/berita-boga/d-7082314/manis-juicy-semangka-merah-diskon-20-di-transmart-diskon-tiap-hari
+https://food.detik.com/berita-boga/d-7082312/hemat-beli-anggur-muscat-hanya-di-transmart-diskon-tiap-hari
+https://food.detik.com/berita-boga/d-7082304/buruan-serbu-beli-ikan-shisamo-hemat-20-di-transmart-diskon-tiap-hari
+https://food.detik.com/berita-boga/d-7082295/transmart-diskon-tiap-hari-20-daging-shabu-harganya-cuan
+https://food.detik.com/tahu-dan-tempe/d-7082258/3-resep-sup-tofu-yang-berkaldu-bening-menyegarkan-dan-kaya-nutrisi
+https://food.detik.com/berita-boga/d-7082438/manis-legit-durian-mini-dari-lereng-gunung-semeru
+https://food.detik.com/info-sehat/d-7082429/mengunyah-makanan-pelan-pelan-bisa-turunkan-berat-badan-ini-faktanya
+https://food.detik.com/info-sehat/d-7082418/catat-7-rempah-yang-ampuh-turunkan-kolesterol-secara-alami
+https://food.detik.com/info-kuliner/d-7081300/christian-bautista-ke-indonesia-review-kerupuk-gendar-hingga-kerupuk-keriting
+https://food.detik.com/info-kuliner/d-7081569/5-kisah-sukses-driver-ojol-yang-punya-trik-untuk-dapat-pemasukan-lebih
+https://food.detik.com/info-kuliner/d-7080936/wanita-ini-sarapan-nasi-pakai-durian-netizen-sebut-sakit-jiwa
+https://food.detik.com/info-sehat/d-7080934/rekomendasi-15-menu-diet-yang-sehat-dan-bernutrisi-ada-telur-hingga-ikan
+https://food.detik.com/info-kuliner/d-7081360/mark-wiens-ke-indonesia-lagi-puas-kulineran-di-surabaya
+https://food.detik.com/kue/d-7080046/3-resep-lumpia-sayuran-yang-segar-renyah-cocok-buat-camilan
+https://food.detik.com/info-kuliner/d-7081299/pemilik-resto-ini-puji-pengunjung-yang-bersihkan-meja-orang-lain
+https://food.detik.com/info-sehat/d-7081114/ini-batas-asupan-kopi-per-hari-yang-aman-dikonsumsi
+https://food.detik.com/info-sehat/d-7080931/5-manfaat-kacang-koro-pedang-bagi-tubuh-serta-kandungan-nutrisinya
+https://food.detik.com/info-sehat/d-7080932/5-asupan-untuk-penderita-darah-tinggi-yang-enak-dikonsumsi-saat-musim-hujan
+https://food.detik.com/info-kuliner/d-7079669/5-seafood-ukuran-jumbo-ini-ada-yang-beratnya-mencapai-453-kg
+https://food.detik.com/info-sehat/d-7079667/7-jenis-rebusan-daun-untuk-menurunkan-kolesterol-tinggi
+https://food.detik.com/info-kuliner/d-7080399/imbas-kontroversi-mci-season-11-masakan-chef-renatta-jadi-sorotan
+https://food.detik.com/info-sehat/d-7079666/7-hal-terbaik-yang-bisa-dilakukan-usai-kebanyakan-makan
+https://food.detik.com/berita-boga/d-7079670/di-bar-mewah-ini-bisa-nikmati-12-cocktail-dengan-panorama-cantik-jakarta
+https://food.detik.com/info-sehat/d-7079664/wasabi-jadi-pelengkap-wajib-sushi-ini-5-manfaat-sehatnya
+https://food.detik.com/info-sehat/d-7079663/5-makanan-yang-bikin-kualitas-sperma-meningkat-dan-banyak
+https://food.detik.com/makanan-laut/d-7078258/3-resep-ikan-kuah-asam-segar-yang-lezat-meresep-bumbunya
+https://food.detik.com/info-sehat/d-7079661/5-makanan-yang-bikin-stress-tambah-parah-batasi-konsumsinya
+https://food.detik.com/info-sehat/d-7079660/10-makanan-penurun-berat-badan-yang-mudah-dicari-dan-cocok-untuk-diet
+https://food.detik.com/info-kuliner/d-7079380/pria-ini-kaget-beli-fillet-salmon-masih-ada-sisik-dan-siripnya
+https://food.detik.com/info-kuliner/d-7079365/pengantarnya-tidak-diberi-tip-pesanan-makanan-rp-1-4-juta-ini-dicuekin
+https://food.detik.com/info-kuliner/d-7079362/bukan-ramen-produk-kemasan-ini-hanya-tawarkan-kuah-ramen-saja
+https://food.detik.com/info-kuliner/d-7079295/wow-kopitiam-di-singapura-ini-laku-terjual-di-rp-464-miliar
+https://food.detik.com/info-kuliner/d-7079337/sate-taichan-vs-sate-asin-pedas-apa-bedanya
+https://food.detik.com/berita-boga/d-7079323/di-restoran-ini-ada-hidangan-seafood-natal-khas-italia-yang-unik
+https://food.detik.com/info-kuliner/d-7079298/viral-resto-rumahan-dihujat-tiktoker-ini-buktikan-tak-seburuk-itu
+https://food.detik.com/berita-boga/d-7079003/mengandung-gamma-oryzanol-benarkah-rice-bran-oil-lebih-sehat
+https://food.detik.com/cooking-event/d-7078570/sania-baking-class-ada-resep-nastar-terbaru-berhadiah-mikser-dan-loyang-gratis
+https://food.detik.com/resto-dan-kafe/d-7078964/restoran-khas-thailand-foo-foo-hadir-di-jakarta
+https://food.detik.com/info-kuliner/d-7078767/orang-jepang-doyan-makan-jahe-ternyata-karena-ini
+https://food.detik.com/resto-dan-kafe/d-7078706/bakso-bara-gurih-nikmat-bakso-malang-tanboy-kun-pakai-gorengan
+https://food.detik.com/info-kuliner/d-7078607/apakah-shoyu-halal-sebagai-bumbu-masak-ini-penjelasan-mui
+https://food.detik.com/info-sehat/d-7078207/8-bahan-dasar-jus-detox-yang-menyehatkan-tubuh-boleh-dicoba
+https://food.detik.com/info-kuliner/d-7078240/food-court-ini-banyak-dikritik-jual-nasi-padang-harganya-rp-138-ribu
+https://food.detik.com/info-sehat/d-7078204/5-manfaat-telur-setengah-matang-dan-cara-mengolahnya
+https://food.detik.com/sup-dan-salad/d-7076662/resep-selada-udang-dan-nanas-yang-segar-creamy-ala-restoran
+https://food.detik.com/info-sehat/d-7078315/sedang-batuk-ini-aturan-makan-agar-batuk-cepat-sembuh
+https://food.detik.com/nasi/d-7076516/resep-nasi-goreng-ayam-dan-telur-yang-gurih-mantap-dan-praktis-dibuat
+https://food.detik.com/info-kuliner/d-7077711/masak-sendiri-menu-fast-food-wanita-ini-sukses-turunkan-bb-44-kg
+https://food.detik.com/info-sehat/d-7078236/hati-hati-5-sayuran-ini-berbahaya-bagi-kesehatan-jika-dikonsumsi-mentah
+https://food.detik.com/info-kuliner/d-7077629/tak-pernah-sepi-pisang-goreng-di-thailand-ini-dianugerahi-bib-gourmand-michelin
+https://food.detik.com/info-kuliner/d-7077592/wow-jelang-perayaan-natal-ada-bakso-sebesar-kalkun-di-foodcourt-ini
+https://food.detik.com/info-kuliner/d-7077715/mengenal-buah-pawpaw-buah-rasa-unik-dengan-bentuk-mirip-pepaya
+https://food.detik.com/berita-boga/d-7077576/jadi-tren-di-tiktok-cromboloni-jadi-langka-di-beberapa-gerai
+https://food.detik.com/info-kuliner/d-7077224/curhat-sering-dapat-kiriman-makanan-tengah-malam-wanita-ini-dikritik
+https://food.detik.com/berita-boga/d-7077246/sah-jamu-resmi-jadi-warisan-budaya-takbenda-unesco
+https://food.detik.com/berita-boga/d-7077132/ada-iga-sapi-panggang-hingga-salmon-coulibiac-spesial-natal-di-sini
+https://food.detik.com/berita-boga/d-7077238/huaah-pedas-segar-rujak-gamel-khas-cirebon-yang-unik
+https://food.detik.com/info-kuliner/d-7077131/ini-5-makanan-china-viral-yang-bikin-netizen-penasaran
+https://food.detik.com/info-sehat/d-7076809/8-makanan-yang-tidak-boleh-dipanaskan-lagi-dapat-berubah-jadi-racun
+https://food.detik.com/info-kuliner/d-7076801/makan-siang-enak-dan-mantap-di-5-restoran-nasi-kapau-modern-ini
+https://food.detik.com/info-kuliner/d-7076264/9-makanan-indonesia-yang-mendunia-rawon-hingga-nasi-padang
+https://food.detik.com/info-sehat/d-7076495/rutin-konsumsi-jeruk-lemon-dan-jeruk-nipis-rasakan-5-manfaat-sehat-ini
+https://food.detik.com/mie-dan-pasta/d-7074655/resep-suun-goreng-udang-dan-telur-lauk-praktis-makan-malam
+https://food.detik.com/daging/d-7074737/3-resep-daging-sapi-dan-ayam-saus-lada-hitam-yang-pedas-hangat
+https://food.detik.com/info-sehat/d-7076261/enak-dan-sehat-5-makanan-tinggi-asam-folat-untuk-cegah-stunting
+https://food.detik.com/nasi/d-7074639/resep-sup-nasi-telur-dan-sayuran-zosui-ala-jepang-untuk-tambah-stamina
+https://food.detik.com/info-sehat/d-7076260/pilihan-menu-diet-seminggu-turun-10-kg-bisa-dicoba-untuk-pemula
+https://food.detik.com/info-sehat/d-7074866/bapak-bapak-rutin-konsumsi-5-makanan-ini-agar-ereksi-lebih-lama-dan-kuat
+https://food.detik.com/advertorial-news-block/d-7075443/kraftheinz-food-service-sodexo-indonesia-gelar-kompetisi-masak
+https://food.detik.com/info-kuliner/d-7075262/bikin-mual-wanita-ini-temukan-daging-burgernya-masih-mentah-dan-merah
+https://food.detik.com/info-kuliner/d-7075242/sulit-cari-pegawai-restoran-ini-terima-lamaran-dari-mantan-napi-dan-pemabuk
+https://food.detik.com/info-kuliner/d-7075175/zonk-beli-nasi-lemak-kemasan-wanita-kaget-isinya-kayak-lontong
+https://food.detik.com/berita-boga/d-7075223/glamour-gladys-suwandhi-dan-leon-hadirkan-bar-dan-restoran-dalam-kemewahan-1920
+https://food.detik.com/info-kuliner/d-7074850/kocak-antar-paket-ke-kawinan-kurir-ini-ditawari-makan-prasmanan
+https://food.detik.com/info-kuliner/d-7074610/keren-bule-inggris-ini-jago-bikin-rendang-pakai-rempah-asli
+https://food.detik.com/info-kuliner/d-7074603/awalnya-populer-di-china-tahu-panas-jadi-tren-di-indonesia
+https://food.detik.com/info-kuliner/d-7073693/restoran-ini-wujudkan-permintaan-pembeli-yang-ulang-tahun-lewat-makanan
+https://food.detik.com/info-kuliner/d-7073713/doyan-durian-ini-6-tips-pilih-durian-agar-gak-kena-zonk
+https://food.detik.com/resto-dan-kafe/d-7074842/cafe-daurelie-gurih-lezat-ravioli-hingga-quiche-di-kafe-rasa-paris
+https://food.detik.com/info-sehat/d-7073680/ini-sebabnya-minum-wine-bikin-sakit-kepala-dan-cara-meredakannya
+https://food.detik.com/kue/d-7072889/resep-pisang-goreng-wijen-hitam-yang-renyah-wangi-buat-teman-ngopi
+https://food.detik.com/info-kuliner/d-7074289/5-jenis-saus-merah-di-dunia-ada-sambal-hingga-saus-salsa
+https://food.detik.com/sayur/d-7072835/resep-tumis-terong-dan-buncis-ala-hunan-empuk-gurih-dan-pedas-menyengat
+https://food.detik.com/ayam/d-7072795/3-resep-ayam-bumbu-tradisional-yang-populer-pedas-dan-lezatnya
+https://food.detik.com/info-sehat/d-7073681/sering-jerawatan-atasi-dengan-rutin-konsumsi-5-jenis-teh-ini
+https://food.detik.com/info-sehat/d-7073663/3-cara-konsumsi-mentimun-buat-diet-yang-ampuh-turunkan-bb
+https://food.detik.com/info-sehat/d-7073677/botol-minum-ternyata-lebih-banyak-mengandung-kuman-dibandingkan-dudukan-toilet
+https://food.detik.com/info-sehat/d-7073667/nasi-dingin-vs-nasi-hangat-mana-yang-cocok-untuk-penderita-diabetes
+https://food.detik.com/info-kuliner/d-7073425/pria-ini-sakit-kepala-selama-lima-bulan-ternyata-ada-sumpit-di-kepalanya
+https://food.detik.com/info-kuliner/d-7073679/5-bahan-makanan-ini-pernah-digunakan-sebagai-alat-transaksi
+https://food.detik.com/info-kuliner/d-7073244/ada-jajanan-es-batu-panggang-bumbu-barbeque-bikin-orang-heran
+https://food.detik.com/info-kuliner/d-7073619/pesan-burger-sayur-wanita-ini-kaget-dapat-porsi-mirip-makanan-kelinci
+https://food.detik.com/info-kuliner/d-7073451/5-makanan-di-kereta-api-indonesia-ini-jadi-favorit-banyak-penumpang
+https://food.detik.com/info-kuliner/d-7073358/pria-diusir-dari-restoran-gegara-pakaiannya-tuai-pro-kontra-netizen
+https://food.detik.com/info-kuliner/d-7073416/dijahili-netizen-wanita-ini-terkejut-saat-lihat-bon-tagihan-makannnya-rp-933-juta
+https://food.detik.com/info-kuliner/d-7073333/bule-australia-cicip-jajanan-minimart-di-bali-ketagihan-roti-pandan
+https://food.detik.com/info-kuliner/d-7073232/penjual-nasi-uduk-curhat-kerap-dibohongi-pembeli-yang-bayar-via-qris
+https://food.detik.com/info-kuliner/d-7073239/mie-instan-jadi-makin-enak-dengan-tambahan-bahan-ini
+https://food.detik.com/info-kuliner/d-7072796/kacau-pengantar-makanan-ini-curi-paket-pelanggan-seharga-rp-7-7-juta
+https://food.detik.com/info-kuliner/d-7071705/sempat-viral-dan-diantre-panjang-5-tempat-makan-ini-sekarang-sepi
+https://food.detik.com/info-kuliner/d-7071707/ibu-ini-berhenti-memasak-untuk-calon-menantu-ini-penyebabnya
+https://food.detik.com/info-kuliner/d-7071702/ada-staples-di-dalam-gorengan-lidah-anak-ini-terluka
+https://food.detik.com/info-kuliner/d-7071696/nenek-vietnam-ini-bertahan-hidup-dengan-minum-soft-drink-selama-50-tahun
+https://food.detik.com/mie-dan-pasta/d-7070614/resep-ramen-udang-kuah-kaldu-gurih-mantap-untuk-penghangat-badan
+https://food.detik.com/info-kuliner/d-7071444/4-driver-ojol-ini-ditraktir-bule-di-bali-cicip-tacos-hingga-makanan-lebanon
+https://food.detik.com/berita-boga/d-7071063/martabak-manis-dari-fujian-jadi-menu-makan-malam-pekerja-tambang-timah
+https://food.detik.com/cooking-event/d-7070857/sania-baking-class-5-resep-kue-spesial-tahun-baru-bonus-mikser-dan-loyang-gratis
+https://food.detik.com/info-kuliner/d-7070850/bcl-dan-tiko-sajikan-menu-tradisional-bali-di-pesta-penikahan
+https://food.detik.com/berita-boga/d-7070775/laris-manis-tipat-cantok-mie-warung-dot-raih-omzet-rp-50-juta-sebulan
+https://food.detik.com/berita-boga/d-7070326/30-tahun-beroperasi-cafe-batavia-dijadikan-cagar-budaya-dki-jakarta
+https://food.detik.com/sayur/d-7069311/resep-oseng-petai-dan-bawang-bombay-yang-renyah-pedas-untuk-lauk-nasi
+https://food.detik.com/info-kuliner/d-7069789/seperti-menu-di-restoran-5-makanan-rumah-sakit-ini-bikin-ngiler
+https://food.detik.com/sayur/d-7069275/resep-tumis-bayam-dan-teri-lauk-sederhana-yang-segar-dan-gurih
+https://food.detik.com/berita-boga/d-7070491/pengantar-makanan-selamatkan-nyawa-pelanggan-hingga-pria-gagal-menangkan-tantangan-makan
+https://food.detik.com/sup-dan-salad/d-7069338/3-resep-soto-khas-sumatera-berbumbu-rempah-untuk-penghangat-badan
+https://food.detik.com/info-kuliner/d-7070423/anti-mainstream-wanita-ini-dapat-hantaran-makanan-di-hari-wisudanya
+https://food.detik.com/info-kuliner/d-7069785/gurih-medhok-hucap-khas-kuningan-yang-sederhana-dan-legendaris
+https://food.detik.com/info-kuliner/d-7069783/ketahui-5-jenis-kopi-hitam-yang-nikmat-dan-aromanya-khas
+https://food.detik.com/info-sehat/d-7069791/nasi-nol-kalori-populer-untuk-turunkan-bb-apakah-aman-dikonsumsi
+https://food.detik.com/info-sehat/d-7069791/nasi-nol-kalori-populer-untuk-turunkan-bb-apakah-aman-dikonsumsi
+https://food.detik.com/info-kuliner/d-7069699/pria-ini-gagal-menangkan-tantangan-makan-meski-sudah-makan-4-500-kalori
+https://food.detik.com/info-kuliner/d-7069033/5-restoran-ini-terpaksa-tutup-gegara-dapurnya-kotor-ada-tikus-hingga-kecoak
+https://food.detik.com/info-kuliner/d-7069652/apes-pria-ini-muntah-muntah-usai-temukan-kecoak-dalam-ramennya
+https://food.detik.com/info-kuliner/d-7069067/pecahkan-rekor-dunia-dua-pria-ini-pergi-ke-99-bar-dalam-sehari
+https://food.detik.com/info-kuliner/d-7069028/beli-pisang-goreng-rp-6-ribuan-pelanggan-kaget-bentuknya-mirip-ikan-bilis
+https://food.detik.com/info-kuliner/d-7069071/haru-pengantar-makanan-ini-berhasil-selamatkan-nyawa-pelanggannya
+https://food.detik.com/mie-dan-pasta/d-7068047/resep-spaghetti-tumis-seafood-dan-cabe-yang-pedas-menyengat-untuk-makan-malam
+https://food.detik.com/mie-dan-pasta/d-7067918/3-resep-mie-ayam-populer-yang-gurih-enak-dimakan-bareng-keluarga
+https://food.detik.com/info-kuliner/d-7069161/selain-pakai-sumpit-telur-tornado-bisa-dibikin-dengan-cara-ini
+https://food.detik.com/info-sehat/d-7069000/berapa-jumlah-kalori-satu-piring-nasi-putih-ini-penjelasannya
+https://food.detik.com/info-kuliner/d-7068999/7-cara-praktis-dan-mudah-atasi-kulkas-yang-tidak-dingin
+https://food.detik.com/info-sehat/d-7068980/7-sayuran-terbaik-untuk-kontrol-gula-darah-penderta-diabetes
+https://food.detik.com/info-kuliner/d-7067626/pria-ini-ungkap-rasanya-jadi-chef-pribadi-konglomerat-netizen-curiga
+https://food.detik.com/berita-boga/d-7068594/bolu-cupu-yang-manis-legit-kue-legendaris-ogan-komering-ilir
+https://food.detik.com/info-kuliner/d-7068587/codeblu-angkat-bicara-soal-masterchef-indonesia-ini-komentarnya
+https://food.detik.com/berita-boga/d-7068374/wajib-dicicipi-4-racikan-nasi-khas-purworejo-yang-kondang-lezatnya
+https://food.detik.com/berita-boga/d-7068200/di-kafe-dessert-ini-bisa-meracik-cokelat-sendiri-dan-cicip-aneka-kue
+https://food.detik.com/info-kuliner/d-7068187/keren-pria-ini-raih-rekor-dunia-kunjungi-99-bar-selama-24-jam
+https://food.detik.com/info-sehat/d-7067775/makan-ikan-sarden-segar-dapat-membuat-kulit-cerah-berseri
+https://food.detik.com/resep/d-7065938/resep-bola-singkong-ndog-geluduk-camilan-jawa-yang-murah-enak
+https://food.detik.com/info-kuliner/d-7067612/5-tips-memasak-yang-keliru-ini-sebaiknya-tak-dilakukan-lagi
+https://food.detik.com/info-kuliner/d-7067289/7-daerah-penghasil-kopi-terbaik-di-indonesia-ada-daerahmu
+https://food.detik.com/info-kuliner/d-7067855/stok-telur-dalam-keadaan-beku-netizen-ini-tuai-kritik-pedas
+https://food.detik.com/info-kuliner/d-7067767/potong-bawang-pakai-pisau-basah-bisa-cegah-mata-berair-apa-benar
+https://food.detik.com/info-sehat/d-7067287/konsumsi-alpukat-bisa-bantu-turunkan-berat-badan-ini-sebabnya
+https://food.detik.com/info-kuliner/d-7067370/ngeri-pasangan-ini-baru-sadar-selama-6-bulan-ternyata-minum-air-toilet
+https://food.detik.com/info-sehat/d-7067007/keren-berhenti-konsumsi-gula-pria-ini-berhasil-turun-bb-90-kg
+https://food.detik.com/info-kuliner/d-7066995/5-catatan-pelanggan-yang-paling-aneh-yang-diterima-pekerja-restoran
+https://food.detik.com/info-kuliner/d-7066829/netizen-ini-bagikan-tips-cuci-kentang-pakai-dishwasher-kena-hujat-netizen
+https://food.detik.com/info-kuliner/d-7066863/beri-nasi-lembek-ke-bayinya-wanita-ini-dicap-sebagai-ibu-tak-bijak
+https://food.detik.com/info-kuliner/d-7066936/masih-diinfus-wanita-ini-tetap-ke-pasar-malam-untuk-jajan-makanan
+https://food.detik.com/info-kuliner/d-7066841/keren-wanita-ini-raup-rp-3-juta-per-hari-jadi-sopir-antar-makanan
+https://food.detik.com/info-kuliner/d-7066795/jangan-kalap-ini-4-tips-makan-sehat-di-pesta-kawinan
+https://food.detik.com/info-kuliner/d-7066694/pelanggan-ini-tuntut-restoran-gegara-temukan-jari-manusia-dalam-salad
+https://food.detik.com/info-kuliner/d-7066332/kocak-pelanggan-ini-ketakutan-makanannya-pakai-sayur-dan-beri-tulisan-ini
+https://food.detik.com/berita-boga/d-7066473/warung-bakso-tanjung-anom-surabaya-legendaris-favorit-ari-lasso
+https://food.detik.com/resep-pembaca/d-7066011/resep-sigeumchi-namul-salad-bayam-korea-yang-segar-gurih
+https://food.detik.com/info-kuliner/d-7065285/3-adab-minum-yang-baik-sesuai-sunnah-nabi-muhammad-saw
+https://food.detik.com/info-kuliner/d-7065281/bikin-rugi-pengunjung-ini-sengaja-tempel-qris-miliknya-di-restoran
+https://food.detik.com/info-kuliner/d-7065278/unik-penjual-buah-ini-tawarkan-nangka-dengan-ukuran-raksasa
+https://food.detik.com/info-kuliner/d-7065262/belanja-ke-pasar-apung-banjarmasin-youtuber-korea-ini-syok-diserbu-penjual
+https://food.detik.com/resep/d-7063786/3-resep-ikan-goreng-bumbu-pedas-asam-cocok-untuk-lauk-makan-siang
+https://food.detik.com/info-sehat/d-7065263/7-sayuran-penurun-kolesterol-tinggi-yang-jahat-bagi-tubuh
+https://food.detik.com/info-sehat/d-7065236/ahli-ungkap-5-minuman-untuk-diet-cepat-turunkan-bb
+https://food.detik.com/info-sehat/d-7064989/rutin-konsumsi-5-makanan-ini-bisa-agar-kulit-sehat-dan-glowing
+https://food.detik.com/info-sehat/d-7065261/5-pemanis-pengganti-gula-tetap-enak-dan-sehat
+https://food.detik.com/info-kuliner/d-7064733/niat-ingin-sedekah-dan-berbagi-makanan-orang-orang-ini-berakhir-zonk
+https://food.detik.com/info-kuliner/d-7064673/penjual-kwetiau-legendaris-ini-putuskan-pensiun-usai-terima-michelin-bib-gourmand
+https://food.detik.com/berita-boga/d-7065369/say-bread-resmikan-bakery-dan-cafe-pertama-di-jakarta
+https://food.detik.com/info-kuliner/d-7064621/duh-tikus-ini-jatuh-ke-dalam-kuah-hotpot-pengunjung-restoran-di-china
+https://food.detik.com/berita-boga/d-7065221/cokelat-champion-dibawa-tni-al-ke-gaza-bantu-pangan-warga-palestina
+https://food.detik.com/info-kuliner/d-7064504/pelayan-kebingungan-usai-terima-pesanan-nasi-lemak-dengan-topping-milo
+https://food.detik.com/info-kuliner/d-7065050/makan-di-restoran-pria-ini-kesal-diminta-bayar-tagihan-orang-lain
+https://food.detik.com/info-kuliner/d-7064971/resto-ini-viral-gegara-minta-pegawai-jalan-kaki-untuk-antar-pesanan-online
+https://food.detik.com/info-kuliner/d-7064890/wow-roti-panggang-keju-seberat-190-kg-pecahkan-rekor-dunia
+https://food.detik.com/berita-boga/d-7064357/legendaris-gudeg-mbok-lindu-yang-lezatnya-langgeng-83-tahun
+https://food.detik.com/info-kuliner/d-7064342/klarifikasi-kiki-dan-belinda-mci-soal-potong-daging-di-grand-final
+https://food.detik.com/berita-boga/d-7064598/tentrem-white-coffee-sido-muncul-inovasi-kopi-3in1-kualitas-bintang-5
+https://food.detik.com/berita-boga/d-7064486/kamboja-green-house-kafe-bernuasa-bali-yang-pernah-disinggahi-menteri-politisi
+https://food.detik.com/info-kuliner/d-7063696/sedih-35-tahun-beroperasi-restoran-populer-di-hong-kong-ini-akan-tutup
+https://food.detik.com/info-kuliner/d-7062942/unik-5-pengantin-ini-pilih-menu-yang-tak-biasa-untuk-pernikahannya
+https://food.detik.com/info-kuliner/d-7063107/duh-bocah-ini-dilarikan-ke-rumah-sakit-usai-makan-tokek-goreng
+https://food.detik.com/sayur/d-7062263/resep-tumis-kangkung-bumbu-tauco-renyah-segar-untuk-lauk-makan-siang
+https://food.detik.com/makanan-laut/d-7062222/resep-tumis-kerang-bumbu-cabe-dan-kemangi-yang-pedas-sedap-rasanya
+https://food.detik.com/sayur/d-7062194/3-resep-jamur-goreng-tepung-yang-renyah-gurih-dan-juicy
+https://food.detik.com/info-sehat/d-7062887/12-makanan-penurun-kolesterol-yang-mudah-didapat-patut-dicoba
+https://food.detik.com/info-sehat/d-7062889/salad-buah-menyehatkan-ini-3-paduan-buah-racikannya
+https://food.detik.com/info-kuliner/d-7062884/manfaat-daun-suji-untuk-makanan-dan-bedanya-dengan-daun-pandan
+https://food.detik.com/info-sehat/d-7063686/tambahkan-5-bahan-ini-dalam-racikan-minuman-untuk-gempur-lemak-perut
+https://food.detik.com/info-kuliner/d-7062797/kecewa-beli-onde-onde-pelanggan-ini-ngamuk-dapat-isian-zonk
+https://food.detik.com/info-kuliner/d-7062815/pria-muslim-ini-geram-diundang-ke-restoran-yang-sajikan-menu-babi
+https://food.detik.com/info-kuliner/d-7063063/kafe-di-malaysia-ini-tawarkan-menu-fine-dining-mewah-untuk-kucing
+https://food.detik.com/info-sehat/d-7062587/10-makanan-di-malam-hari-untuk-diet-yang-tidak-bikin-gemuk-dan-padat-gizi
+https://food.detik.com/info-kuliner/d-7062620/beli-dua-gelas-es-teh-di-restoran-pengunjung-ini-kaget-harganya-rp-144-ribu
+https://food.detik.com/warung-makan/d-7062868/chicken-steak-14-bang-ray-empuk-juicy-chicken-steak-mantan-pramugari
+https://food.detik.com/info-kuliner/d-7062529/beri-laporan-palsu-pelanggan-ini-bikin-pengantar-makanan-kena-suspend
+https://food.detik.com/berita-boga/d-7062304/legendaris-nasi-lengko-pagongan-yang-diracik-dengan-bahan-sederhana
+https://food.detik.com/info-kuliner/d-7062279/wow-penjual-bubur-tambun-rela-tempuh-jarak-29-km-ke-jakarta-demi-cuan
+https://food.detik.com/berita-boga/d-7062243/parodi-gadis-kretek-jadi-gadis-klatak-untuk-populerkan-sate-klathak
+https://food.detik.com/info-kuliner/d-7061082/temukan-rambut-di-pesanan-makan-begini-cara-sopan-mengembalikannya
+https://food.detik.com/info-kuliner/d-7061730/terbaru-kitkat-rasa-gula-mentega-yang-terinspirasi-sereal-populer
+https://food.detik.com/info-sehat/d-7062225/membakar-makanan-dengan-arang-ternyata-punya-5-manfaat-ini
+https://food.detik.com/info-kuliner/d-7062273/stok-nasi-beku-lebih-praktis-daripada-nasi-hangat
+https://food.detik.com/info-sehat/d-7061734/7-buah-yang-mengandung-vitamin-b-tinggi-ada-jeruk-hingga-pisang
+https://food.detik.com/info-sehat/d-7061100/5-kesalahan-umum-menyimpan-makanan-ini-justru-berbahaya-bagi-kesehatan
+https://food.detik.com/kue/d-7060349/resep-garlic-bread-renyah-gurih-untuk-camilan-atau-pelengkap-sup
+https://food.detik.com/tahu-dan-tempe/d-7060314/3-resep-kupat-tahu-yang-segar-pedas-kuahnya-untuk-makan-siang
+https://food.detik.com/info-kuliner/d-7061728/rebus-telur-berapa-menit-ini-durasi-dan-cara-merebus-yang-tepat
+https://food.detik.com/nasi/d-7060276/resep-nasi-goreng-ayam-dan-udang-pedas-mantap-untuk-sarapan-spesial
+https://food.detik.com/berita-boga/d-7061753/5-fakta-kopi-arabika-java-ijen-raung-bondowoso-yang-menarik
+https://food.detik.com/info-sehat/d-7061732/kurangi-konsumsi-5-makanan-ini-agar-daya-ingat-tak-menurun
+https://food.detik.com/info-kuliner/d-7061187/pertama-kali-cicip-daging-kuda-begini-reaksi-aktor-malaysia
+https://food.detik.com/info-kuliner/d-7061033/demi-menebus-kangen-makanan-kampung-halaman-5-orang-ini-rela-bayar-mahal
+https://food.detik.com/info-kuliner/d-7061181/cantik-bukan-di-tangan-seniman-ini-lukis-henna-di-atas-cookies
+https://food.detik.com/info-kuliner/d-7061017/tak-gengsi-wanita-lulusan-sarjana-ini-jualan-pisang-goreng
+https://food.detik.com/info-kuliner/d-7061166/cromboloni-yang-flaky-viral-di-tiktok-ini-5-tempat-membelinya
+https://food.detik.com/info-kuliner/d-7061041/miskom-pria-mengira-bisa-makan-sepuasnya-ternyata-ditagih-rp-1-4-juta
+https://food.detik.com/info-kuliner/d-7060917/teori-kupas-kulit-jeruk-disebut-bisa-buktikan-cinta-sejati
+https://food.detik.com/info-kuliner/d-7060654/pelayan-restoran-di-china-ini-pura-pura-jadi-robot-saat-layani-pembeli
+https://food.detik.com/info-kuliner/d-7060787/5-idol-k-pop-ini-bisa-masak-makanan-indonesia-seblak-hingga-empal
+https://food.detik.com/info-kuliner/d-7060294/duh-dikira-daun-bawang-pelanggan-ini-hampir-telan-kecoak-dalam-kuenya
+https://food.detik.com/info-kuliner/d-7060233/restoran-ini-dikritik-karena-beri-harga-sesuai-berat-makanan-yang-dipesan
+https://food.detik.com/info-kuliner/d-7059789/curhat-penjual-makanan-kesal-karena-pembeli-tak-siapkan-uang-tunai
+https://food.detik.com/info-kuliner/d-7059784/dk-ikon-cicip-jajanan-indonesia-kepincut-gurihnya-keripik-tempe
+https://food.detik.com/info-kuliner/d-7059783/unik-fans-kfc-ini-sajikan-ayam-goreng-di-pesta-pernikahannya
+https://food.detik.com/info-kuliner/d-7059781/potluck-budaya-makan-bersama-yang-sarat-makna-hadiah
+https://food.detik.com/info-kuliner/d-7059776/begini-cara-memilih-dan-menyimpan-jeruk-yang-tepat-buat-jadi-stok
+https://food.detik.com/ayam/d-7058066/3-resep-bistik-ayam-komplet-sajian-spesial-yang-gampang-dibuat
+https://food.detik.com/info-sehat/d-7059775/5-makanan-ini-sebaiknya-tak-dimakan-dengan-ikan-ini-sebabnya
+https://food.detik.com/nasi/d-7058034/resep-nasi-goreng-tahu-dan-kacang-polong-yang-berbumbu-sederhana
+https://food.detik.com/info-sehat/d-7059774/5-makanan-enak-untuk-jaga-tubuh-tetap-fit-saat-musim-hujan
+https://food.detik.com/info-sehat/d-7059120/7-minuman-pagi-yang-sehat-dan-cocok-buat-diet-semuanya-nikmat
+https://food.detik.com/info-kuliner/d-7059109/duh-di-warung-ayam-penyet-di-singapura-ini-ada-kecoak
+https://food.detik.com/info-kuliner/d-7058720/keren-dua-lipa-belajar-bikin-sushi-di-jepang-bersama-chef
+https://food.detik.com/info-kuliner/d-7059086/beli-nasi-lemak-rp-290-ribu-di-inggris-pelajar-ini-jadi-kangen-kampung-halaman
+https://food.detik.com/info-kuliner/d-7058842/duh-eks-pejabat-as-ini-hina-islam-dan-penjual-makanan-halal
+https://food.detik.com/info-kuliner/d-7058668/denny-sumargo-jadi-warlok-pakistan-jajan-gorengan-hingga-roti-prata
+https://food.detik.com/berita-boga/d-7058615/uniknya-kupat-bongkok-khas-tegal-yang-diracik-pakai-tempe-busuk
+https://food.detik.com/berita-boga/d-7059070/resep-cumi-saus-tiram-selera-yang-gurih-dan-lezat-yuk-coba
+https://food.detik.com/berita-boga/d-7058354/lexus-feast-kembali-hadir-dengan-sajian-lezat-yang-ramah-lingkungan
+https://food.detik.com/berita-boga/d-7058144/legendaris-di-surabaya-ini-toko-kopi-sigan-yang-ada-sejak-1950-an
+https://food.detik.com/berita-boga/d-7058135/symphony-of-lele-sajian-lele-berkelas-priyayi-bisa-dinikmati-di-restoran-ini
+https://food.detik.com/info-kuliner/d-7057187/unik-ronde-kepala-king-kong-ini-seram-tapi-kenyal-enak
+https://food.detik.com/info-kuliner/d-7057210/jijik-penjual-ini-lepaskan-tulang-dari-daging-mentah-pakai-mulutnya
+https://food.detik.com/warung-makan/d-7058460/bakso-gepeng-bewok-kenyal-garing-bakso-gepeng-gerobakan-rp-20-ribuan
+https://food.detik.com/info-kuliner/d-7057209/dikira-jago-masak-pria-ini-tipu-keluarganya-dengan-makanan-siap-saji
+https://food.detik.com/info-kuliner/d-7057853/hanya-beli-sepotong-sandwich-wanita-ini-salah-bayar-rp-108-juta
+https://food.detik.com/info-kuliner/d-7057205/antre-panjang-demi-kalkun-gratis-wanita-ini-malah-dapat-ayam-mini
+https://food.detik.com/makanan-laut/d-7056938/resep-rujak-juhi-betawi-segar-renyah-dengan-saus-kacang-yang-gurih-pedas
+https://food.detik.com/tahu-dan-tempe/d-7056957/resep-tumis-tahu-goreng-bumbu-cabe-lauk-sederhana-yang-pedas-lezat
+https://food.detik.com/info-kuliner/d-7057203/cara-makan-pringles-yang-benar-agar-gurihnya-maksimal
+https://food.detik.com/nasi/d-7056899/3-resep-bubur-ayam-cincang-yang-praktis-dan-enak-buat-sarapan
+https://food.detik.com/info-kuliner/d-7057345/5-minuman-segar-menyehatkan-cocok-diminum-tiap-saat
+https://food.detik.com/info-sehat/d-7057194/jadwal-jam-makan-untuk-diet-saat-makan-pagi-siang-malam-dan-camilan
+https://food.detik.com/info-kuliner/d-7054748/pria-kecewa-beli-mie-udang-tapi-tidak-sesuai-dengan-gambar-menu
+https://food.detik.com/berita-boga/d-7056783/mencicipi-nikmatnya-es-krim-jadul-di-solo-yang-ada-sejak-1952
+https://food.detik.com/info-kuliner/d-7057177/wanita-bantu-beli-orderan-fiktif-kopi-gegara-cinta-ditolak
+https://food.detik.com/info-kuliner/d-7056672/5-orang-ini-kena-denda-puluhan-juta-gegara-bawa-makanan-ke-bandara-australia
+https://food.detik.com/info-kuliner/d-7057075/pakai-bone-marrow-nasi-padang-ini-dibanderol-rp-225-ribu
+https://food.detik.com/info-kuliner/d-7056459/nyentrik-5-orang-ini-hobi-masak-dengan-gaya-tak-biasa
+https://food.detik.com/kue/d-7055524/resep-bandang-lojo-camilan-khas-bugis-yang-lembut-legit
+https://food.detik.com/info-kuliner/d-7056211/hanya-atur-porsi-makan-pria-ini-turun-bb-16-kg-dalam-4-bulan
+https://food.detik.com/nasi/d-7055516/3-resep-nasi-berbumbu-gurih-sedap-untuk-makan-bareng-keluarga
+https://food.detik.com/info-kuliner/d-7056205/tips-bikin-telur-rebus-sempurna-dari-chef-ternama-begini-triknya
+Data Berhasil Di Simpan dengan Jumlah 321
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">scraping_detik_news</span></code> untuk melakukan <em>web scraping</em> pada halaman indeks berita Detik dengan parameter sebagai berikut:</p>
+<ul class="simple">
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">'https://news.detik.com/indeks'</span></code>, yang merupakan halaman utama indeks berita Detik.</p></li>
+<li><p><strong>Jumlah Konten</strong>: <code class="docutils literal notranslate"><span class="pre">num_content=50</span></code>, yang merupakan jumlah konten berita yang ingin diambil dari setiap kategori.</p></li>
+<li><p><strong>Kategori</strong>: <code class="docutils literal notranslate"><span class="pre">['Edu']</span></code>, yang menunjukkan bahwa kamu ingin mengambil konten dari kategori ‘Edu’.</p></li>
+</ul>
+<p>Fungsi ini akan menjelajahi halaman indeks berita Detik, mengambil konten dari kategori yang diinputkan, dan mencoba mengumpulkan 50 berita dari kategori tersebut. Jika berhasil, hasilnya akan disimpan dalam file CSV.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="200411100102_Ekstraksi%20Fitur%20Page%20Rank.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Page Rank</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="200411100102_UAS_PPW.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UAS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dhita Aprilia Dhamayanti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
